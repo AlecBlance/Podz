@@ -11,6 +11,9 @@ export default {
         "custom-neutrals-offwhite": "#FFF9EF",
         "custom-card-artist": "#898989",
       },
+      height: {
+        screen: ["100vh /* fallback for Opera, IE and etc. */", "100dvh"],
+      },
     },
   },
   plugins: [],
