@@ -583,6 +583,26 @@ video {
   height: 100vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
+.h-\[100dvh\] {
+  height: 100dvh;
+}
+
+.min-h-\[100dvh\] {
+  min-height: 100dvh;
+}
+
+.min-h-\[50\%\] {
+  min-height: 50%;
+}
+
+.min-h-\[10px\] {
+  min-height: 10px;
+}
+
 .w-10 {
   width: 2.5rem;
 }

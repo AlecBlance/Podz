@@ -5,7 +5,7 @@ import Section from "./components /Section";
 
 const App = () => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen min-h-[100dvh] flex flex-col">
       <div className="p-5 grow overflow-y-auto scrollbar-hide">
         <Header />
         <Section title="Jump back in">
