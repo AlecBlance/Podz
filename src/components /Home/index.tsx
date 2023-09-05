@@ -4,7 +4,7 @@ import Section from "./Section";
 
 const Home = () => {
   return (
-    <div className="p-5 grow overflow-y-auto scrollbar-hide">
+    <>
       <Header />
       <Section title="Jump back in">
         <MusicCard title="Sample" artist="Artist" />
@@ -69,7 +69,7 @@ const Home = () => {
           artist="Dear Media"
         />
       </Section>
-    </div>
+    </>
   );
 };
 export default Home;
