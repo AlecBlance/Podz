@@ -434,6 +434,10 @@ video {
   display: none;
 }
 
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -582,10 +586,6 @@ video {
 .h-screen {
   height: 100vh /* fallback for Opera, IE and etc. */;
   height: 100dvh;
-}
-
-.min-h-\[100dvh\] {
-  min-height: 100dvh;
 }
 
 .w-10 {
