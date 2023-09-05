@@ -1,35 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from "./components /Header";
+import MobileNavigation from "./components /MobileNavigation";
+import MusicCard from "./components /MusicCard";
+import Section from "./components /Section";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="h-screen flex flex-col">
+      <div className="p-5 grow overflow-y-auto scrollbar-hide">
+        <Header />
+        <Section title="Jump back in">
+          <MusicCard title="Sample" artist="Artist" />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+        </Section>
+        <Section title="Recommended songs">
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+        </Section>
+        <Section title="Jump back in">
+          <MusicCard title="Sample" artist="Artist" />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+        </Section>
+        <Section title="Jump back in">
+          <MusicCard title="Sample" artist="Artist" />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+          <MusicCard
+            title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            artist="Dear Media"
+          />
+        </Section>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+      <MobileNavigation />
+    </div>
+  );
+};
+export default App;
