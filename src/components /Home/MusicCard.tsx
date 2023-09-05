@@ -1,4 +1,4 @@
-import { MusicCardProps } from "../types";
+import { MusicCardProps } from "../../types";
 
 const MusicCard = ({ title, artist, image }: MusicCardProps) => {
   return (
