@@ -6,7 +6,7 @@ import Search from "./components /Search";
 const App = () => {
   return (
     <div className="h-screen flex flex-col">
-      <div className="p-5 grow overflow-y-auto scrollbar-hide">
+      <div className="grow overflow-y-auto scrollbar-hide">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
