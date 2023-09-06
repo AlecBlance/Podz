@@ -4,10 +4,11 @@ import PlayingNowPage from "./PlayingNowPage";
 const PlayingNow = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
 
-  isPageVisible &&
-    addEventListener("popstate", () => {
-      setIsPageVisible(false);
-    });
+  onpopstate = () => {
+    if (!isPageVisible) return;
+    setIsPageVisible(false);
+    history.go(1);
+  };
 
   return (
     <>
