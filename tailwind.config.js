@@ -16,7 +16,7 @@ export default {
       },
       backgroundImage: {
         "library-header":
-          "url('https://res.cloudinary.com/devbqyiud/image/upload/v1693966926/Muzica/m9nt7okn6puz637edagy.jpg')",
+          "url('https://res.cloudinary.com/devbqyiud/image/upload/c_scale,w_900/v1693966926/Muzica/m9nt7okn6puz637edagy.jpg')",
       },
     },
   },
