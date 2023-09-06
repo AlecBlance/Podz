@@ -9,14 +9,10 @@ const PlayingNowPage = ({
 }) => {
   const hide = {
     top: "100dvh",
-    transitionEnd: {
-      display: "none",
-    },
   };
 
   const show = {
     top: "0",
-    display: "block",
   };
 
   console.log(isPageVisible);
@@ -24,7 +20,7 @@ const PlayingNowPage = ({
   return (
     <motion.div
       className="bg-cover bg-center absolute p-5 h-screen right-0 left-0 bg-[url(https://res.cloudinary.com/devbqyiud/image/upload/v1693966806/cld-sample-3.jpg)]"
-      initial={{ ...hide, display: "none" }}
+      initial={hide}
       animate={isPageVisible ? show : hide}
       transition={{ type: "spring", damping: 16 }}
     >

@@ -6,7 +6,7 @@ import Library from "./components /Library";
 
 const App = () => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden relative">
       <div className="grow overflow-y-auto scrollbar-hide">
         <Routes>
           <Route path="/" element={<Home />} />
