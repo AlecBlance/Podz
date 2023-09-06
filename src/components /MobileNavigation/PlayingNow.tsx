@@ -4,6 +4,11 @@ import PlayingNowPage from "./PlayingNowPage";
 const PlayingNow = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
 
+  isPageVisible &&
+    addEventListener("popstate", () => {
+      setIsPageVisible(false);
+    });
+
   return (
     <>
       <div className="flex items-center px-5 py-3">
