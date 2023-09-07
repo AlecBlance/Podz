@@ -45,8 +45,12 @@ const PlayingNowPage = ({
       <div className="mb-10">
         <div className="px-5 pb-2 mb-3 flex justify-between items-center">
           <div>
-            <h1 className="text-custom-neutrals-offwhite">Easy On Me</h1>
-            <h1 className="text-sm text-custom-card-artist mt-1">Adele</h1>
+            <h1 className="text-custom-neutrals-offwhite sm:text-xl">
+              Easy On Me
+            </h1>
+            <h1 className="text-sm text-custom-card-artist mt-1 sm:text-lg">
+              Adele
+            </h1>
           </div>
           <div>
             <svg
@@ -55,7 +59,7 @@ const PlayingNowPage = ({
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              className="w-6 h-6 text-custom-card-artist"
+              className="w-6 h-6 sm:w-8 sm:h-8 text-custom-card-artist"
             >
               <path
                 stroke-linecap="round"
@@ -73,8 +77,8 @@ const PlayingNowPage = ({
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
           />
           <div className="flex justify-between mt-2">
-            <p className="text-xs text-custom-card-artist">2:01</p>
-            <p className="text-xs text-custom-card-artist">3:44</p>
+            <p className="text-xs text-custom-card-artist sm:text-sm">2:01</p>
+            <p className="text-xs text-custom-card-artist sm:text-sm">3:44</p>
           </div>
         </div>
         <div className="flex justify-center px-5 pb-10">
