@@ -4,7 +4,7 @@ const Section = (props: SectionProps) => {
   if (!props) return null;
   return (
     <div className="mt-5">
-      <h1 className="text-custom-neutrals-offwhite font-medium sm:text-lg">
+      <h1 className="text-custom-neutrals-offwhite font-medium sm:text-lg md:text-xl">
         {props.title}
       </h1>
       <div className="mt-3 flex overflow-x-auto scrollbar-hide">

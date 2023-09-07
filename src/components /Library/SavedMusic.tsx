@@ -2,7 +2,7 @@ import { MusicCardProps } from "../../types";
 
 const SavedMusic = ({ title, artist, image }: MusicCardProps) => {
   return (
-    <div className="flex items-center my-3 sm:my-4 mx-5">
+    <div className="flex items-center my-3 sm:my-4 md:mx-8 md:my-5 mx-5">
       <div className="grow flex items-center overflow-hidden">
         <div className="w-11 h-11 sm:w-14 sm:h-14 bg-slate-400 rounded-md mr-4 shrink-0">
           {image}

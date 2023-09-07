@@ -3,7 +3,7 @@ import SearchResult from "./SearchResult";
 const Search = () => {
   return (
     <div>
-      <div className="pb-5 sticky top-0 right-0 left-0 p-5 bg-[#131313]">
+      <div className="pb-5 sticky top-0 right-0 left-0 p-5 md:p-8 bg-[#131313]">
         <label className="flex items-center rounded-md bg-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ const Search = () => {
           ></input>
         </label>
       </div>
-      <div className="px-5 py-1">
+      <div className="px-5 md:px-8 py-1">
         <SearchResult title="Sample" artist="sample" />
         <SearchResult title="Sample" artist="sample" />
       </div>

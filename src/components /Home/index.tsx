@@ -4,7 +4,7 @@ import Section from "./Section";
 
 const Home = () => {
   return (
-    <div className="p-5">
+    <div className="p-8">
       <Header />
       <Section title="Jump back in">
         <MusicCard title="Sample" artist="Artist" />
