@@ -1,4 +1,4 @@
-import { SectionProps } from "../../types";
+import { SectionProps } from "../../../types";
 
 const Section = (props: SectionProps) => {
   if (!props) return null;

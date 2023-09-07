@@ -1,5 +1,5 @@
 import Header from "./Header";
-import MusicCard from "./MusicCard";
+import MusicCard from "../../Music/MusicCard";
 import Section from "./Section";
 
 const Home = () => {

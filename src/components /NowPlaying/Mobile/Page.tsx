@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const PlayingNowPage = ({
+const Page = ({
   isPageVisible,
   setIsPageVisible,
 }: {
@@ -106,4 +106,4 @@ const PlayingNowPage = ({
     </motion.div>
   );
 };
-export default PlayingNowPage;
+export default Page;

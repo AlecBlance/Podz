@@ -1,7 +1,7 @@
 import { useState } from "react";
-import PlayingNowPage from "./PlayingNowPage";
+import Page from "./Page";
 
-const PlayingNow = () => {
+const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
 
   onpopstate = () => {
@@ -64,11 +64,8 @@ const PlayingNow = () => {
           </svg>
         </div>
       </div>
-      <PlayingNowPage
-        isPageVisible={isPageVisible}
-        setIsPageVisible={setIsPageVisible}
-      />
+      <Page isPageVisible={isPageVisible} setIsPageVisible={setIsPageVisible} />
     </>
   );
 };
-export default PlayingNow;
+export default Footer;

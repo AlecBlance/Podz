@@ -1,4 +1,4 @@
-import SavedMusic from "./SavedMusic";
+import SavedMusic from "../../Music/SavedMusic";
 
 const Library = () => {
   return (

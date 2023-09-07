@@ -1,4 +1,4 @@
-import PlayingNow from "./PlayingNow";
+import PlayingNow from "../NowPlaying/Mobile/Footer";
 import { Link, useMatch } from "react-router-dom";
 
 const MobileNavigation = () => {

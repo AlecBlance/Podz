@@ -1,4 +1,4 @@
-import SearchResult from "./SearchResult";
+import SearchResult from "../../Music/SearchResult";
 
 const Search = () => {
   return (
