@@ -4,6 +4,7 @@ import { Link, useMatch } from "react-router-dom";
 const MobileNavigation = () => {
   const isHome = useMatch("/");
   const isSearch = useMatch("/search");
+  const isLibrary = useMatch("/library");
 
   return (
     <div className="bg-[#131313] text-custom-neutrals-offwhite">
@@ -16,7 +17,7 @@ const MobileNavigation = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 mx-4 ${
+            className={`w-7 h-7 sm:w-9 sm:h-9 mx-4 ${
               isHome ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >
@@ -34,7 +35,7 @@ const MobileNavigation = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 mx-4  ${
+            className={`w-7 h-7 sm:w-9 sm:h-9 mx-4  ${
               isSearch ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >
@@ -45,21 +46,24 @@ const MobileNavigation = () => {
             />
           </svg>
         </Link>
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className={`w-7 h-7 mx-4 text-custom-card-artist`}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-          />
-        </svg>
+        <Link to="/library">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className={`w-7 h-7 sm:w-9 sm:h-9 mx-4 ${
+              isLibrary ? "text-custom-vibrant-blue" : "text-custom-card-artist"
+            }`}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </Link>
       </div>
     </div>
   );

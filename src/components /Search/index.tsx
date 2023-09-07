@@ -11,7 +11,7 @@ const Search = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-5 h-5 mx-2 text-custom-card-artist"
+            className="w-5 h-5 sm:w-7 sm:h-7 mx-2 text-custom-card-artist"
           >
             <path
               strokeLinecap="round"
@@ -20,7 +20,7 @@ const Search = () => {
             />
           </svg>
           <input
-            className="w-full h-8 rounded-md pr-3 text-sm focus:outline-none bg-transparent"
+            className="w-full h-8 sm:h-10 rounded-md pr-3 text-sm sm:text-base focus:outline-none bg-transparent"
             placeholder="What do you want to listen to?"
           ></input>
         </label>

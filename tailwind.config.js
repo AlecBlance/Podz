@@ -14,6 +14,10 @@ export default {
       height: {
         screen: ["100vh /* fallback for Opera, IE and etc. */", "100dvh"],
       },
+      backgroundImage: {
+        "library-header":
+          "url('https://res.cloudinary.com/devbqyiud/image/upload/c_scale,w_900/v1693966926/Muzica/m9nt7okn6puz637edagy.jpg')",
+      },
     },
   },
   plugins: [],
