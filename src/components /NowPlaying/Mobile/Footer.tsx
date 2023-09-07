@@ -17,12 +17,12 @@ const Footer = () => {
           className="grow flex items-center overflow-hidden"
           onClick={() => setIsPageVisible(true)}
         >
-          <div className="bg-slate-400 w-10 h-10 sm:w-12 sm:h-12 rounded-md shrink-0"></div>
+          <div className="bg-slate-400 w-10 h-10   rounded-md shrink-0"></div>
           <div className="mx-4 grow overflow-hidden">
-            <h2 className="text-sm truncate sm:text-base">
+            <h2 className="text-sm truncate ">
               Easy On Meeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             </h2>
-            <p className="text-xs text-custom-card-artist truncate sm:text-sm">
+            <p className="text-xs text-custom-card-artist truncate ">
               Adeleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             </p>
           </div>
@@ -35,7 +35,7 @@ const Footer = () => {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            className="w-6 h-6 sm:w-8 sm:h-8 mx-4 text-custom-card-artist"
+            className="w-6 h-6   mx-4 text-custom-card-artist"
           >
             <path
               stroke-linecap="round"
@@ -44,7 +44,7 @@ const Footer = () => {
             />
           </svg>
           <svg
-            className="w-10 h-10 sm:w-12 sm:h-12 text-custom-vibrant-blue"
+            className="w-10 h-10   text-custom-vibrant-blue"
             viewBox="0 0 24 24"
             fill="currentcolor"
             xmlns="http://www.w3.org/2000/svg"
