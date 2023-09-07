@@ -17,3 +17,12 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.slider:not(:hover)::-webkit-slider-thumb {
+  appearance: none;
+  width: 0;
+}
+
+.slider:not(:hover) {
+  overflow: hidden;
+}
