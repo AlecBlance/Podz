@@ -2,7 +2,7 @@ import { MusicCardProps } from "../../types";
 
 const RecentMusic = ({ title, artist, image }: MusicCardProps) => {
   return (
-    <div className="text-white mt-3 flex items-center">
+    <div className="text-white py-2 px-3 flex items-center cursor-pointer hover:bg-slate-800">
       <div className="bg-slate-400 w-11 h-11 shrink-0 mr-2">{image}</div>
       <div className="overflow-hidden grow">
         <h1 className="truncate text-sm">{title}</h1>
