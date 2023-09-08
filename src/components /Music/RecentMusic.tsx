@@ -5,8 +5,10 @@ const RecentMusic = ({ title, artist, image }: MusicCardProps) => {
     <div className="text-white mt-5 flex items-center">
       <div className="bg-slate-400 w-11 h-11 shrink-0 mr-2">{image}</div>
       <div className="overflow-hidden grow">
-        <h1 className="truncate">{title}</h1>
-        <p className="truncate text-sm text-custom-card-artist">{artist}</p>
+        <h1 className="truncate text-sm">{title}</h1>
+        <p className="truncate text-xs text-custom-card-artist mt-1">
+          {artist}
+        </p>
       </div>
       <div>
         <svg
