@@ -104,7 +104,7 @@ const Sidebar = () => {
           Library
         </Link>
       </div>
-      <div className="grow p-3 flex flex-col overflow-auto font-medium text-custom-neutrals-offwhite">
+      <div className="grow p-3 flex flex-col overflow-hidden font-medium text-custom-neutrals-offwhite">
         <div className="flex">
           <svg
             width="24"
