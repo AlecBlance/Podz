@@ -10,7 +10,7 @@ import Footer from "./components /NowPlaying/Desktop/Footer";
 const App = () => {
   const isLaptopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden relative">
       <div className="flex flex-col lg:flex-row overflow-hidden relative h-full">
         {isLaptopScreen && <Sidebar />}
         <div

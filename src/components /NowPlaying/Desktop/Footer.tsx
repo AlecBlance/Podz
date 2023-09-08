@@ -1,4 +1,15 @@
+import { useState } from "react";
+import Page from "./Page";
+
 const Footer = () => {
+  const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
+
+  onpopstate = () => {
+    if (!isPageVisible) return;
+    setIsPageVisible(false);
+    history.go(1);
+  };
+
   return (
     <div className="bg-[#131313] flex flex-col">
       <input
@@ -8,7 +19,10 @@ const Footer = () => {
         max="100"
       />
       <div className="flex">
-        <div className="flex items-center w-1/3">
+        <div
+          className="flex items-center w-1/3 cursor-pointer"
+          onClick={() => setIsPageVisible(true)}
+        >
           <div className="w-16 h-16 bg-slate-400 shrink-0"></div>
           <div className="ml-3 grow overflow-hidden">
             <h1 className="text-sm text-custom-neutrals-offwhite truncate">
@@ -69,6 +83,7 @@ const Footer = () => {
           <input type="range" className="slider h-1" />
         </div>
       </div>
+      <Page isPageVisible={isPageVisible} setIsPageVisible={setIsPageVisible} />
     </div>
   );
 };
