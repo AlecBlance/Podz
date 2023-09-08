@@ -9,7 +9,19 @@ const Sidebar = () => {
   // const musicCard = useRef(null);
   // const [limit, setLimit] = useState(0);
   const [recent] = useState([
-    <RecentMusic key="a" title="SAAAA" artist="ILALIM" />,
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
+    { title: "a", artist: "a", image: "a" },
   ]);
 
   // useEffect(() => {
@@ -42,10 +54,10 @@ const Sidebar = () => {
           />
         </svg>
       </div>
-      <div className="border-b border-slate-200/30 p-5">
+      <div className="border-b border-slate-200/30 p-3">
         <Link
           to="/"
-          className={`flex mb-4 items-center group hover:text-custom-vibrant-blue font-bold ${
+          className={`flex mb-4 items-center group text-sm hover:text-custom-vibrant-blue font-bold ${
             isHome ? "text-custom-vibrant-blue" : "text-custom-card-artist"
           }`}
         >
@@ -55,7 +67,7 @@ const Sidebar = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 mr-4 group-hover:text-custom-vibrant-blue ${
+            className={`w-5 h-5 mr-4 group-hover:text-custom-vibrant-blue ${
               isHome ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >
@@ -69,7 +81,7 @@ const Sidebar = () => {
         </Link>
         <Link
           to="/library"
-          className={`flex items-center group hover:text-custom-vibrant-blue font-bold ${
+          className={`flex items-center group text-sm hover:text-custom-vibrant-blue font-bold ${
             isLibrary ? "text-custom-vibrant-blue" : "text-custom-card-artist"
           }`}
         >
@@ -79,7 +91,7 @@ const Sidebar = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 mr-4 group-hover:text-custom-vibrant-blue ${
+            className={`w-5 h-5 mr-4 group-hover:text-custom-vibrant-blue ${
               isLibrary ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >
@@ -92,7 +104,7 @@ const Sidebar = () => {
           Library
         </Link>
       </div>
-      <div className="grow p-5 flex flex-col overflow-auto font-medium text-custom-neutrals-offwhite">
+      <div className="grow p-3 flex flex-col overflow-auto font-medium text-custom-neutrals-offwhite">
         <div className="flex">
           <svg
             width="24"
@@ -100,20 +112,21 @@ const Sidebar = () => {
             viewBox="0 0 24 25"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="mr-4 text-custom-neutrals-offwhite"
+            className="mr-4 w-5 h-5 text-custom-neutrals-offwhite"
           >
             <path
               d="M17.68 7.72006V9.12006C17.68 9.80006 17.13 10.3601 16.43 10.3601C15.74 10.3601 15.18 9.80006 15.18 9.12006V7.72006C15.18 7.38854 15.3117 7.0706 15.5461 6.83618C15.7805 6.60176 16.0985 6.47006 16.43 6.47006C17.13 6.47006 17.68 7.03006 17.68 7.72006ZM13.25 8.86006V16.1301C13.25 16.4616 13.1183 16.7795 12.8839 17.0139C12.6495 17.2484 12.3315 17.3801 12 17.3801C11.6685 17.3801 11.3505 17.2484 11.1161 17.0139C10.8817 16.7795 10.75 16.4616 10.75 16.1301V8.86006C10.75 8.18006 11.31 7.61006 12 7.61006C12.69 7.61006 13.25 8.18006 13.25 8.86006ZM22 11.8001V13.2001C22 13.8801 21.44 14.4401 20.75 14.4401C20.06 14.4401 19.5 13.8801 19.5 13.2001V11.8001C19.5 11.1101 20.06 10.5601 20.75 10.5601C21.44 10.5601 22 11.1101 22 11.8001ZM4.5 11.8001V13.2001C4.5 13.8801 3.94 14.4401 3.25 14.4401C2.55 14.4401 2 13.8801 2 13.2001V11.8001C2 11.1101 2.55 10.5601 3.25 10.5601C3.94 10.5601 4.5 11.1101 4.5 11.8001ZM8.82 15.8801V17.2701C8.82 17.9501 8.26 18.5001 7.57 18.5001C6.88 18.5001 6.32 17.9501 6.32 17.2701V15.8801C6.32 15.1801 6.88 14.6301 7.57 14.6301C7.90152 14.6301 8.21946 14.7618 8.45388 14.9962C8.6883 15.2306 8.82 15.5485 8.82 15.8801ZM13.25 19.8601V21.2501C13.25 21.5816 13.1183 21.8995 12.8839 22.1339C12.6495 22.3684 12.3315 22.5001 12 22.5001C11.6685 22.5001 11.3505 22.3684 11.1161 22.1339C10.8817 21.8995 10.75 21.5816 10.75 21.2501V19.8601C10.75 19.5285 10.8817 19.2106 11.1161 18.9762C11.3505 18.7418 11.6685 18.6101 12 18.6101C12.3315 18.6101 12.6495 18.7418 12.8839 18.9762C13.1183 19.2106 13.25 19.5285 13.25 19.8601ZM13.25 3.75006V5.14006C13.25 5.47158 13.1183 5.78952 12.8839 6.02394C12.6495 6.25836 12.3315 6.39006 12 6.39006C11.6685 6.39006 11.3505 6.25836 11.1161 6.02394C10.8817 5.78952 10.75 5.47158 10.75 5.14006V3.75006C10.75 3.05006 11.31 2.50006 12 2.50006C12.3315 2.50006 12.6495 2.63176 12.8839 2.86618C13.1183 3.1006 13.25 3.41854 13.25 3.75006ZM17.68 12.8401V17.2701C17.68 17.9601 17.13 18.5001 16.43 18.5001C15.74 18.5001 15.18 17.9601 15.18 17.2701V12.8401C15.18 12.1401 15.74 11.5901 16.43 11.5901C17.13 11.5901 17.68 12.1401 17.68 12.8401ZM8.82 7.72006V12.1501C8.82 12.8501 8.26 13.4001 7.57 13.4001C7.40585 13.4001 7.2433 13.3677 7.09165 13.3049C6.93999 13.2421 6.80219 13.15 6.68612 13.0339C6.57004 12.9179 6.47797 12.7801 6.41515 12.6284C6.35233 12.4768 6.32 12.3142 6.32 12.1501V7.72006C6.32 7.38854 6.4517 7.0706 6.68612 6.83618C6.92054 6.60176 7.23848 6.47006 7.57 6.47006C7.90152 6.47006 8.21946 6.60176 8.45388 6.83618C8.6883 7.0706 8.82 7.38854 8.82 7.72006Z"
               fill="#FFF9EF"
             />
           </svg>
-          <p>Your Recent Music</p>
+          <p className="text-sm">Your Recent Music</p>
         </div>
         <div ref={childDiv} className="h-full">
-          {recent}
+          {recent.map((each, i) => (
+            <RecentMusic key={i} title={each.title} artist={each.artist} />
+          ))}
         </div>
       </div>
-      <div className="text-white">a</div>
     </div>
   );
 };
