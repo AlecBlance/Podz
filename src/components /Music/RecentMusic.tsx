@@ -17,7 +17,7 @@ const RecentMusic = ({ title, artist, image }: MusicCardProps) => {
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="shrink-0 ml-2"
+          className="shrink-0 ml-2 w-5 h-5"
         >
           <path
             d="M6.5 9C6.9 9 9 5.66667 10 4H11V18.5L10 20L6 15L3 14.5L2.5 9.5C3.66667 9.33333 6.1 9 6.5 9Z"
