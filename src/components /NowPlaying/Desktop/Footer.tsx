@@ -19,19 +19,21 @@ const Footer = () => {
         max="100"
       />
       <div className="flex">
-        <div
-          className="flex items-center w-1/3 cursor-pointer"
-          onClick={() => setIsPageVisible(true)}
-        >
-          <div className="w-16 h-16 bg-slate-400 shrink-0"></div>
-          <div className="ml-3 grow overflow-hidden">
-            <h1 className="text-sm text-custom-neutrals-offwhite truncate">
-              Sa
-              ilalimmmmeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-            </h1>
-            <p className="text-xs text-custom-card-artist truncate">
-              ng maitim na ilaweeeeeeeeeeeeeeeeeeeeee
-            </p>
+        <div className="flex items-center w-1/3">
+          <div
+            className="cursor-pointer flex items-center overflow-hidden"
+            onClick={() => setIsPageVisible(true)}
+          >
+            <div className="w-16 h-16 bg-slate-400 shrink-0"></div>
+            <div className="ml-3 grow overflow-hidden">
+              <h1 className="text-sm text-custom-neutrals-offwhite truncate">
+                Sa
+                ilalimmmmeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+              </h1>
+              <p className="text-xs text-custom-card-artist truncate">
+                ng maitim na ilaweeeeeeeeeeeeeeeeeeeeee
+              </p>
+            </div>
           </div>
           <div>
             <svg
