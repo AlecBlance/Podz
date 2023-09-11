@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "esnext",
+        "strict": true,
+        "esModuleInterop": false,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "useDefineForClassFields": true,
+        "lib": [
+            "es2020",
+            "dom",
+            "dom.iterable"
+        ],
+        "allowJs": false,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "allowImportingTsExtensions": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true
+    },
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ],
+    "files": [
+        "./src/App.tsx",
+        "./src/main.tsx",
+        "./src/store.ts",
+        "./src/types.ts",
+        "./src/vite-env.d.ts",
+        "./src/components /Music/MusicCard.tsx",
+        "./src/components /Music/RecentMusic.tsx",
+        "./src/components /Music/SavedMusic.tsx",
+        "./src/components /Music/SearchResult.tsx",
+        "./src/components /Navigation/Mobile.tsx",
+        "./src/components /Navigation/Sidebar.tsx",
+        "./src/components /NowPlaying/Desktop/Footer.tsx",
+        "./src/components /NowPlaying/Desktop/Page.tsx",
+        "./src/components /NowPlaying/Mobile/Footer.tsx",
+        "./src/components /NowPlaying/Mobile/Page.tsx",
+        "./src/components /Pages/Home/Header.tsx",
+        "./src/components /Pages/Home/Section.tsx",
+        "./src/components /Pages/Home/index.tsx",
+        "./src/components /Pages/Library/index.tsx",
+        "./src/components /Pages/Search/index.tsx",
+        "./src/hooks/index.ts",
+        "./src/reducers/recommendationsReducer.ts",
+        "./src/services/recommendations.ts"
+    ],
+    "include": [
+        "src"
+    ]
+}

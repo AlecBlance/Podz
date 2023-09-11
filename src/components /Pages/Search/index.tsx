@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
+import { SearchResult as SearchResultType } from "../../../types";
 import SearchResult from "../../Music/SearchResult";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { search } from "../../../reducers/searchReducer";
 
 const Search = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const searchResults: SearchResultType[] = useAppSelector(
+    (state) => state.search
+  );
+
+  useEffect(() => {
+    if (!searchQuery) return;
+    dispatch(search(searchQuery));
+  }, [searchQuery, dispatch]);
+
   return (
     <div>
       <div className="pb-5 sticky top-0 right-0 left-0 p-5  bg-[#131313]">
@@ -22,12 +37,20 @@ const Search = () => {
           <input
             className="w-full h-8  rounded-md pr-3 text-sm  focus:outline-none bg-transparent"
             placeholder="What do you want to listen to?"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           ></input>
         </label>
       </div>
       <div className="px-5 py-1 lg:-ml-3">
-        <SearchResult title="Sample" artist="sample" />
-        <SearchResult title="Sample" artist="sample" />
+        {searchResults.map((result) => (
+          <SearchResult
+            key={result.id}
+            title={result.title}
+            artist={result.author}
+            image={result.image}
+          />
+        ))}
       </div>
     </div>
   );

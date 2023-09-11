@@ -64,3 +64,10 @@ export interface RecommendationsTracks {
   artistName: string[];
   id: string;
 }
+
+export interface SearchResult {
+  id: string;
+  title: string;
+  author: string;
+  image: string;
+}
