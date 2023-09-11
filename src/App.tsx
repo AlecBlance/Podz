@@ -6,9 +6,18 @@ import Library from "./components /Pages/Library";
 import { useMediaQuery } from "react-responsive";
 import Sidebar from "./components /Navigation/Sidebar";
 import Footer from "./components /NowPlaying/Desktop/Footer";
+import { useEffect } from "react";
+import { initializeRecommendations } from "./reducers/recommendationsReducer";
+import { useAppDispatch } from "./hooks";
 
 const App = () => {
+  const dispatch = useAppDispatch();
   const isLaptopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
+
+  useEffect(() => {
+    dispatch(initializeRecommendations());
+  });
+
   return (
     <div className="h-screen flex flex-col overflow-hidden relative">
       <div className="flex flex-col lg:flex-row overflow-hidden relative h-full">
