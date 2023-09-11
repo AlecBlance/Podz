@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 const Sidebar = () => {
   const isHome = useMatch("/");
   const isLibrary = useMatch("/library");
+  const isSearch = useMatch("/search");
   const childDiv = useRef(null);
   // const musicCard = useRef(null);
   // const [limit, setLimit] = useState(0);
@@ -94,7 +95,7 @@ const Sidebar = () => {
         </Link>
         <Link
           to="/library"
-          className={`flex items-center group text-sm hover:text-custom-vibrant-blue font-bold ${
+          className={`flex mb-4 items-center group text-sm hover:text-custom-vibrant-blue font-bold ${
             isLibrary ? "text-custom-vibrant-blue" : "text-custom-card-artist"
           }`}
         >
@@ -115,6 +116,30 @@ const Sidebar = () => {
             />
           </svg>
           Library
+        </Link>
+        <Link
+          to="/search"
+          className={`flex items-center group text-sm hover:text-custom-vibrant-blue font-bold ${
+            isSearch ? "text-custom-vibrant-blue" : "text-custom-card-artist"
+          }`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className={`w-5 h-5 mr-4 group-hover:text-custom-vibrant-blue ${
+              isSearch ? "text-custom-vibrant-blue" : "text-custom-card-artist"
+            }`}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+          Search
         </Link>
       </div>
       <div className="grow flex flex-col overflow-hidden font-medium text-custom-neutrals-offwhite">

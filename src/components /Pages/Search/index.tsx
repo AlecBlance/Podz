@@ -25,7 +25,7 @@ const Search = () => {
           ></input>
         </label>
       </div>
-      <div className="px-5  py-1">
+      <div className="px-5 py-1 lg:-ml-3">
         <SearchResult title="Sample" artist="sample" />
         <SearchResult title="Sample" artist="sample" />
       </div>
