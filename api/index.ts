@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import searchRouter from "./routes/search.js";
+import searchRouter from "./routes/search";
 
 const app = express();
 app.use(cors());
