@@ -3,8 +3,9 @@ import searchService from "../services/search.js";
 
 const searchRouter = Router();
 
-searchRouter.get("/:query", async (req, res) => {
-  res.json(await searchService.search(req.params.query));
+searchRouter.get("/", async (req, res) => {
+  if (!(typeof req.query.query === "string")) return;
+  res.json(await searchService.search(req.query.query));
 });
 
 export default searchRouter;
