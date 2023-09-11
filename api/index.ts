@@ -10,3 +10,5 @@ app.use("/api/search", searchRouter);
 // app.listen(3001, () => {
 //   console.log("Server running at http://localhost:3001");
 // });
+
+export default app;
