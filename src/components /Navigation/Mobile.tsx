@@ -1,4 +1,4 @@
-import PlayingNow from "./PlayingNow";
+import PlayingNow from "../NowPlaying/Mobile/Footer";
 import { Link, useMatch } from "react-router-dom";
 
 const MobileNavigation = () => {
@@ -17,7 +17,7 @@ const MobileNavigation = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 sm:w-9 sm:h-9 mx-4 ${
+            className={`w-7 h-7   mx-4 ${
               isHome ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >
@@ -35,7 +35,7 @@ const MobileNavigation = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 sm:w-9 sm:h-9 mx-4  ${
+            className={`w-7 h-7   mx-4  ${
               isSearch ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >
@@ -53,7 +53,7 @@ const MobileNavigation = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-7 h-7 sm:w-9 sm:h-9 mx-4 ${
+            className={`w-7 h-7   mx-4 ${
               isLibrary ? "text-custom-vibrant-blue" : "text-custom-card-artist"
             }`}
           >

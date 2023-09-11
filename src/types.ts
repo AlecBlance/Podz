@@ -10,3 +10,54 @@ export interface SectionProps {
   children: React.ReactNode;
   title: string;
 }
+
+export interface SpotifyClientCredentials {
+  accessToken: string;
+  accessTokenExpirationTimestampMs: number;
+  isAnonymous: boolean;
+  clientId: string;
+}
+
+export interface RecommendationsResponse {
+  playlists: {
+    items: [
+      {
+        id: string;
+        name: string;
+      }
+    ];
+  };
+}
+
+export interface Recommendations {
+  name: string;
+  tracks: RecommendationsTracks[];
+}
+
+export interface RecommendationsTracksResponse {
+  items: [
+    {
+      track: {
+        name: string;
+        album: {
+          images: [
+            {
+              url: string;
+            }
+          ];
+        };
+        artists: [
+          {
+            name: string;
+          }
+        ];
+      };
+    }
+  ];
+}
+
+export interface RecommendationsTracks {
+  name: string;
+  imageUrl: string;
+  artistName: string[];
+}

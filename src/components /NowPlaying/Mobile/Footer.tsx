@@ -1,7 +1,7 @@
 import { useState } from "react";
-import PlayingNowPage from "./PlayingNowPage";
+import Page from "./Page";
 
-const PlayingNow = () => {
+const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
 
   onpopstate = () => {
@@ -17,12 +17,12 @@ const PlayingNow = () => {
           className="grow flex items-center overflow-hidden"
           onClick={() => setIsPageVisible(true)}
         >
-          <div className="bg-slate-400 w-10 h-10 sm:w-12 sm:h-12 rounded-md shrink-0"></div>
+          <div className="bg-slate-400 w-10 h-10   rounded-md shrink-0"></div>
           <div className="mx-4 grow overflow-hidden">
-            <h2 className="text-sm truncate sm:text-base">
+            <h2 className="text-sm truncate ">
               Easy On Meeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             </h2>
-            <p className="text-xs text-custom-card-artist truncate sm:text-sm">
+            <p className="text-xs text-custom-card-artist truncate ">
               Adeleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
             </p>
           </div>
@@ -35,7 +35,7 @@ const PlayingNow = () => {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            className="w-6 h-6 sm:w-8 sm:h-8 mx-4 text-custom-card-artist"
+            className="w-6 h-6   mx-4 text-custom-card-artist"
           >
             <path
               stroke-linecap="round"
@@ -44,7 +44,7 @@ const PlayingNow = () => {
             />
           </svg>
           <svg
-            className="w-10 h-10 sm:w-12 sm:h-12 text-custom-vibrant-blue"
+            className="w-10 h-10   text-custom-vibrant-blue"
             viewBox="0 0 24 24"
             fill="currentcolor"
             xmlns="http://www.w3.org/2000/svg"
@@ -57,18 +57,15 @@ const PlayingNow = () => {
               className="text-custom-neutrals-offwhite"
             />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M2.25 12C2.25 6.615 6.615 2.25 12 2.25C17.385 2.25 21.75 6.615 21.75 12C21.75 17.385 17.385 21.75 12 21.75C6.615 21.75 2.25 17.385 2.25 12ZM16.274 11.017C16.4492 11.1145 16.5951 11.257 16.6967 11.4299C16.7983 11.6027 16.8519 11.7995 16.8519 12C16.8519 12.2005 16.7983 12.3973 16.6967 12.5701C16.5951 12.743 16.4492 12.8855 16.274 12.983L10.671 16.096C10.4998 16.191 10.3067 16.2397 10.1109 16.2373C9.91513 16.2348 9.72336 16.1813 9.55458 16.082C9.3858 15.9828 9.24586 15.8411 9.14859 15.6712C9.05133 15.5012 9.00011 15.3088 9 15.113V8.887C9 8.03 9.921 7.487 10.671 7.904L16.274 11.017Z"
             />
           </svg>
         </div>
       </div>
-      <PlayingNowPage
-        isPageVisible={isPageVisible}
-        setIsPageVisible={setIsPageVisible}
-      />
+      <Page isPageVisible={isPageVisible} setIsPageVisible={setIsPageVisible} />
     </>
   );
 };
-export default PlayingNow;
+export default Footer;
