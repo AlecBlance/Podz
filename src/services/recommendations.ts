@@ -27,7 +27,7 @@ const getTracks = async (id: string): Promise<RecommendationsTracks[]> => {
     headers: { Authorization: token },
   };
   const result = await axios.get<RecommendationsTracksResponse>(
-    `https://api.spotify.com/v1/playlists/${id}/tracks?market=PH&fields=items%28track%28name%2Calbum%28images%28url%29%29%2Cartists%28name%29%29%29&limit=6`,
+    `https://api.spotify.com/v1/playlists/${id}/tracks?market=PH&fields=items%28track%28name%2Calbum%28images%28url%29%29%2Cartists%28name%29%29%29&limit=10`,
     config
   );
   return result.data.items.map((track) => ({
@@ -37,12 +37,14 @@ const getTracks = async (id: string): Promise<RecommendationsTracks[]> => {
   }));
 };
 
-const getRecommendations = async (): Promise<Recommendations[]> => {
+const getRecommendations = async (
+  country: string
+): Promise<Recommendations[]> => {
   const config = {
     headers: { Authorization: token },
   };
   const result = await axios.get<RecommendationsResponse>(
-    "https://api.spotify.com/v1/browse/featured-playlists?country=PH&limit=6",
+    `https://api.spotify.com/v1/browse/featured-playlists?country=${country}&limit=5`,
     config
   );
   return await Promise.all(

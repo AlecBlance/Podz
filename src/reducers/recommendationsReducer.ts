@@ -19,8 +19,13 @@ export const initializeRecommendations = () => {
   return async (dispatch: Dispatch) => {
     const { accessToken } = await recommendationsService.loginSpotify();
     recommendationsService.setToken(accessToken);
-    const recommendations = await recommendationsService.getRecommendations();
-    dispatch(setRecommendations(recommendations));
+    const phRecommendations = await recommendationsService.getRecommendations(
+      "PH"
+    );
+    const usRecommendations = await recommendationsService.getRecommendations(
+      "US"
+    );
+    dispatch(setRecommendations([...phRecommendations, ...usRecommendations]));
   };
 };
 
