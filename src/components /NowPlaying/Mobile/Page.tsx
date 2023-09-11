@@ -15,8 +15,6 @@ const Page = ({
     top: "0",
   };
 
-  console.log(isPageVisible);
-
   return (
     <motion.div
       className="flex flex-col bg-cover bg-center absolute h-screen right-0 left-0 bg-gradient-to-b from-[#0042a7] to-slate-950"
