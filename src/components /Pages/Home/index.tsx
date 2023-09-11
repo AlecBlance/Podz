@@ -8,14 +8,14 @@ const Home = () => {
   const recommendations: Recommendations[] = useAppSelector(
     (state) => state.recommendations
   );
-  console.log(recommendations);
   return (
     <div className="p-8">
       <Header />
       {recommendations.map((recommendation) => (
-        <Section title={recommendation.name}>
+        <Section key={recommendation.id} title={recommendation.name}>
           {recommendation.tracks.map((track) => (
             <MusicCard
+              key={track.id}
               title={track.name}
               artist={track.artistName.join(", ")}
               image={track.imageUrl}
