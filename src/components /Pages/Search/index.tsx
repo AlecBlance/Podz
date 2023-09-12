@@ -44,12 +44,7 @@ const Search = () => {
       </div>
       <div className="px-5 py-1 lg:-ml-3">
         {searchResults.map((result) => (
-          <SearchResult
-            key={result.id}
-            title={result.title}
-            artist={result.author}
-            image={result.image}
-          />
+          <SearchResult key={result.id} track={result} />
         ))}
       </div>
     </div>

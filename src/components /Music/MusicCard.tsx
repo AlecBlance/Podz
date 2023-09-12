@@ -1,6 +1,9 @@
-import { MusicCardProps } from "../../types";
+import { RecommendationsTracks } from "../../types";
 
-const MusicCard = ({ title, artist, image }: MusicCardProps) => {
+const MusicCard = ({ track }: { track: RecommendationsTracks }) => {
+  const title = track.name;
+  const artist = track.artistName.join(", ");
+  const image = track.imageUrl;
   return (
     <div className="lg:hover:bg-slate-800 flex justify-center lg:p-4 cursor-pointer rounded-lg">
       <div className="w-32 mr-4 lg:m-0">

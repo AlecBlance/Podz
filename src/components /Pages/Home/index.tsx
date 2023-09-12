@@ -14,12 +14,7 @@ const Home = () => {
       {recommendations.map((recommendation) => (
         <Section key={recommendation.id} title={recommendation.name}>
           {recommendation.tracks.map((track) => (
-            <MusicCard
-              key={track.id}
-              title={track.name}
-              artist={track.artistName.join(", ")}
-              image={track.imageUrl}
-            ></MusicCard>
+            <MusicCard key={track.id} track={track}></MusicCard>
           ))}
         </Section>
       ))}
