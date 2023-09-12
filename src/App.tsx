@@ -8,11 +8,12 @@ import Sidebar from "./components /Navigation/Sidebar";
 import Footer from "./components /NowPlaying/Desktop/Footer";
 import { useEffect } from "react";
 import { initializeRecommendations } from "./reducers/recommendationsReducer";
-import { useAppDispatch } from "./hooks";
+import { useAppDispatch, useAppSelector } from "./hooks";
 
 const App = () => {
   const dispatch = useAppDispatch();
   const isLaptopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
+  const playing = useAppSelector((state) => state.playing);
 
   useEffect(() => {
     dispatch(initializeRecommendations());
@@ -36,6 +37,14 @@ const App = () => {
         {!isLaptopScreen && <MobileNavigation />}
       </div>
       {isLaptopScreen && <Footer />}
+      {playing && (
+        <audio
+          className="hidden"
+          src={`https://podz-backend.fly.dev/${playing}`}
+          controls
+          autoPlay
+        />
+      )}
     </div>
   );
 };

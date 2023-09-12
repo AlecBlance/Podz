@@ -1,11 +1,22 @@
+import { useAppDispatch } from "../../hooks";
+import { setPlaying } from "../../reducers/playingReducer";
 import { SearchResult } from "../../types";
 
 const SearchResult = ({ track }: { track: SearchResult }) => {
   const title = track.title;
   const artist = track.author;
   const image = track.image;
+  const dispatch = useAppDispatch();
+
+  const play = () => {
+    dispatch(setPlaying(track.id));
+  };
+
   return (
-    <div className="flex items-center p-3 lg:hover:bg-slate-800 cursor-pointer">
+    <div
+      className="flex items-center p-3 lg:hover:bg-slate-800 cursor-pointer"
+      onClick={play}
+    >
       <div
         style={{ backgroundImage: image && `url('${image}')` }}
         className={`w-11 h-11 ${

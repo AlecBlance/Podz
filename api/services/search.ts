@@ -11,15 +11,20 @@ const search = async (
   });
   if (!musicResults.results) return { error: "No results found" };
   const newResults = musicResults.results as unknown as SearchResponse[];
-  console.log(newResults);
   return newResults
-    .filter((result) => result.title?.text !== "Shorts")
+    .filter(
+      (result) =>
+        result.title?.text &&
+        result.thumbnails?.[0].url &&
+        result.author?.name &&
+        result.title?.text !== "Shorts"
+    )
     .map((result) => {
       return {
         id: result.id,
         title: result.title.text,
-        author: result.author?.name,
-        image: result.thumbnails?.[0].url,
+        author: result.author.name,
+        image: result.thumbnails[0].url,
       };
     });
 };
