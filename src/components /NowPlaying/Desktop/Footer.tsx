@@ -17,7 +17,7 @@ const Footer = ({ playing }: { playing: SearchResult }) => {
         type="range"
         className="slider w-full h-1 z-10"
         min="1"
-        max="100"
+        max={playing.duration}
       />
       <div className="flex">
         <div className="flex items-center w-1/3 h-16">

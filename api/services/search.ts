@@ -11,6 +11,7 @@ const search = async (
   });
   if (!musicResults.results) return { error: "No results found" };
   const newResults = musicResults.results as unknown as SearchResponse[];
+  console.log(newResults);
   return newResults
     .filter(
       (result) =>
@@ -25,6 +26,7 @@ const search = async (
         title: result.title.text,
         author: result.author.name,
         image: result.thumbnails[0].url,
+        duration: result.duration.seconds,
       };
     });
 };

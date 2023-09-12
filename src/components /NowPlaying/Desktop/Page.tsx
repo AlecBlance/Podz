@@ -62,7 +62,7 @@ const Page = ({
           <input
             type="range"
             min="1"
-            max="100"
+            max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
           />
           <p className="text-xs text-custom-card-artist ml-3">3:44</p>

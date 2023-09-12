@@ -79,7 +79,7 @@ const Page = ({
           <input
             type="range"
             min="1"
-            max="100"
+            max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
           />
           <div className="flex justify-between mt-2">

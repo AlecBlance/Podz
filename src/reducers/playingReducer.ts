@@ -7,6 +7,7 @@ const initialState: SearchResult = {
   title: "",
   author: "",
   image: "",
+  duration: 0,
 };
 
 const playingSlice = createSlice({

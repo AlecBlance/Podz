@@ -70,4 +70,5 @@ export interface SearchResult {
   title: string;
   author: string;
   image?: string;
+  duration: number;
 }
