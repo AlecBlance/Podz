@@ -1,74 +1,28 @@
 import Header from "./Header";
 import MusicCard from "../../Music/MusicCard";
 import Section from "./Section";
+import { useAppSelector } from "../../../hooks";
+import { Recommendations } from "../../../types";
 
 const Home = () => {
+  const recommendations: Recommendations[] = useAppSelector(
+    (state) => state.recommendations
+  );
   return (
     <div className="p-8">
       <Header />
-      <Section title="Jump back in">
-        <MusicCard title="Sample" artist="Artist" />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-      </Section>
-      <Section title="Recommended songs">
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-      </Section>
-      <Section title="Jump back in">
-        <MusicCard title="Sample" artist="Artist" />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-      </Section>
-      <Section title="Jump back in">
-        <MusicCard title="Sample" artist="Artist" />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-        <MusicCard
-          title="Circle Timeaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          artist="Dear Media"
-        />
-      </Section>
+      {recommendations.map((recommendation) => (
+        <Section key={recommendation.id} title={recommendation.name}>
+          {recommendation.tracks.map((track) => (
+            <MusicCard
+              key={track.id}
+              title={track.name}
+              artist={track.artistName.join(", ")}
+              image={track.imageUrl}
+            ></MusicCard>
+          ))}
+        </Section>
+      ))}
     </div>
   );
 };

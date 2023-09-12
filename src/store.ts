@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import recommendationsReducer from "./reducers/recommendationsReducer";
+import searchReducer from "./reducers/searchReducer";
 
 const store = configureStore({
   reducer: {
     recommendations: recommendationsReducer,
+    search: searchReducer,
   },
 });
 

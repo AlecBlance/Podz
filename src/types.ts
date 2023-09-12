@@ -32,6 +32,7 @@ export interface RecommendationsResponse {
 export interface Recommendations {
   name: string;
   tracks: RecommendationsTracks[];
+  id: string;
 }
 
 export interface RecommendationsTracksResponse {
@@ -45,6 +46,7 @@ export interface RecommendationsTracksResponse {
               url: string;
             }
           ];
+          id: string;
         };
         artists: [
           {
@@ -60,4 +62,12 @@ export interface RecommendationsTracks {
   name: string;
   imageUrl: string;
   artistName: string[];
+  id: string;
+}
+
+export interface SearchResult {
+  id: string;
+  title: string;
+  author: string;
+  image: string;
 }
