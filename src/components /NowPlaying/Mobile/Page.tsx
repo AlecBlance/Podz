@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
+import { SearchResult } from "../../../types";
 
 const Page = ({
   isPageVisible,
   setIsPageVisible,
+  playing,
 }: {
   isPageVisible: boolean;
   setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  playing: SearchResult;
 }) => {
   const hide = {
     top: "100dvh",
@@ -38,13 +41,22 @@ const Page = ({
         </svg>
       </div>
       <div className="grow flex justify-center items-center">
-        <div className="w-80 h-80 bg-slate-400"></div>
+        <div
+          className={`w-80 h-80 ${
+            !playing.image && "bg-slate-400"
+          } bg-cover bg-center`}
+          style={{
+            backgroundImage: playing.image && `url('${playing.image}')`,
+          }}
+        ></div>
       </div>
       <div className="mb-10">
         <div className="px-5 pb-2 mb-3 flex justify-between items-center">
           <div>
-            <h1 className="text-custom-neutrals-offwhite ">Easy On Me</h1>
-            <h1 className="text-sm text-custom-card-artist mt-1 ">Adele</h1>
+            <h1 className="text-custom-neutrals-offwhite ">{playing.title}</h1>
+            <h1 className="text-sm text-custom-card-artist mt-1 ">
+              {playing.author}
+            </h1>
           </div>
           <div>
             <svg

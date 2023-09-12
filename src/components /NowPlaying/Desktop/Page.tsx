@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
+import { SearchResult } from "../../../types";
 
 const Page = ({
   isPageVisible,
   setIsPageVisible,
+  playing,
 }: {
   isPageVisible: boolean;
   setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  playing: SearchResult;
 }) => {
   const hide = {
     top: "100dvh",
@@ -39,10 +42,19 @@ const Page = ({
       </div>
       <div className="mb-10 h-full flex justify-end flex-col">
         <div className="px-5 pb-2 mb-3 flex items-end">
-          <div className="bg-slate-400 w-28 h-28 mr-5"></div>
+          <div
+            className={`${
+              playing.image && "bg-slate-400"
+            } bg-center bg-cover w-28 h-28 mr-5`}
+            style={{
+              backgroundImage: playing.image && `url('${playing.image}')`,
+            }}
+          ></div>
           <div>
-            <h1 className="text-custom-neutrals-offwhite ">Easy On Me</h1>
-            <h1 className="text-sm text-custom-card-artist mt-1 ">Adele</h1>
+            <h1 className="text-custom-neutrals-offwhite ">{playing.title}</h1>
+            <h1 className="text-sm text-custom-card-artist mt-1 ">
+              {playing.author}
+            </h1>
           </div>
         </div>
         <div className="px-5 flex items-center mb-3">

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Page from "./Page";
+import { SearchResult } from "../../../types";
 
-const Footer = () => {
+const Footer = ({ playing }: { playing: SearchResult }) => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
 
   onpopstate = () => {
@@ -17,13 +18,18 @@ const Footer = () => {
           className="grow flex items-center overflow-hidden"
           onClick={() => setIsPageVisible(true)}
         >
-          <div className="bg-slate-400 w-10 h-10   rounded-md shrink-0"></div>
+          <div
+            className={`${
+              !playing.image && "bg-slate-400"
+            } w-10 h-10 rounded-md shrink-0 bg-center bg-cover`}
+            style={{
+              backgroundImage: playing.image && `url('${playing.image}')`,
+            }}
+          ></div>
           <div className="mx-4 grow overflow-hidden">
-            <h2 className="text-sm truncate ">
-              Easy On Meeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-            </h2>
+            <h2 className="text-sm truncate ">{playing.title}</h2>
             <p className="text-xs text-custom-card-artist truncate ">
-              Adeleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+              {playing.author}
             </p>
           </div>
         </div>
@@ -64,7 +70,11 @@ const Footer = () => {
           </svg>
         </div>
       </div>
-      <Page isPageVisible={isPageVisible} setIsPageVisible={setIsPageVisible} />
+      <Page
+        isPageVisible={isPageVisible}
+        setIsPageVisible={setIsPageVisible}
+        playing={playing}
+      />
     </>
   );
 };

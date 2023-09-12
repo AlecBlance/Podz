@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 const App = () => {
   const dispatch = useAppDispatch();
   const isLaptopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
-  const playing = useAppSelector((state) => state.playing.id);
+  const playing = useAppSelector((state) => state.playing);
 
   useEffect(() => {
     dispatch(initializeRecommendations());
@@ -34,13 +34,13 @@ const App = () => {
             <Route path="/library" element={<Library />} />
           </Routes>
         </div>
-        {!isLaptopScreen && <MobileNavigation />}
+        {!isLaptopScreen && <MobileNavigation playing={playing} />}
       </div>
-      {isLaptopScreen && <Footer />}
-      {playing && (
+      {isLaptopScreen && <Footer playing={playing} />}
+      {playing.id && (
         <audio
           className="hidden"
-          src={`https://podz-backend.fly.dev/${playing}`}
+          src={`https://podz-backend.fly.dev/${playing.id}`}
           controls
           autoPlay
         />

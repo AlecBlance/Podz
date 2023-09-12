@@ -1,14 +1,15 @@
+import { SearchResult } from "../../types";
 import PlayingNow from "../NowPlaying/Mobile/Footer";
 import { Link, useMatch } from "react-router-dom";
 
-const MobileNavigation = () => {
+const MobileNavigation = ({ playing }: { playing: SearchResult }) => {
   const isHome = useMatch("/");
   const isSearch = useMatch("/search");
   const isLibrary = useMatch("/library");
 
   return (
     <div className="bg-[#131313] text-custom-neutrals-offwhite">
-      <PlayingNow />
+      {playing.id && <PlayingNow playing={playing} />}
       <div className="border-t border-slate-100/5 px-5 py-3 justify-center flex items-center">
         <Link to="/">
           <svg
