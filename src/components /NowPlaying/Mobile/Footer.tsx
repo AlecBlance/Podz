@@ -1,15 +1,18 @@
 import { useState } from "react";
 import Page from "./Page";
-import { SearchResult } from "../../../types";
+import { useAppSelector } from "../../../hooks";
 
-const Footer = ({ playing }: { playing: SearchResult }) => {
+const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
+  const playing = useAppSelector((state) => state.playing);
 
   onpopstate = () => {
     if (!isPageVisible) return;
     setIsPageVisible(false);
     history.go(1);
   };
+
+  if (!playing.id) return null;
 
   return (
     <>

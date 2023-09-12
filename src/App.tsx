@@ -34,7 +34,7 @@ const App = () => {
             <Route path="/library" element={<Library />} />
           </Routes>
         </div>
-        {!isLaptopScreen && <MobileNavigation playing={playing} />}
+        {!isLaptopScreen && <MobileNavigation />}
       </div>
       {isLaptopScreen && <Footer playing={playing} />}
       {playing.id && (
