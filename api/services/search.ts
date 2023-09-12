@@ -13,7 +13,7 @@ const search = async (
   const newResults = musicResults.results as unknown as SearchResponse[];
   console.log(newResults);
   return newResults
-    .filter((result) => result.title.text !== "Shorts")
+    .filter((result) => result.title?.text !== "Shorts")
     .map((result) => {
       return {
         id: result.id,
