@@ -9,7 +9,7 @@ const MusicCard = ({ track }: { track: RecommendationsTracks }) => {
   const dispatch = useAppDispatch();
 
   const play = () => {
-    dispatch(playFromHome(`${title} ${artist}`));
+    dispatch(playFromHome(`${title} ${artist}`, image));
   };
 
   return (

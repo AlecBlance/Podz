@@ -16,15 +16,19 @@ const playingSlice = createSlice({
     setPlaying(_state, action) {
       return action.payload;
     },
+    setPlayingImage(state, action) {
+      return { ...state, image: action.payload };
+    },
   },
 });
 
-export const { setPlaying } = playingSlice.actions;
+export const { setPlaying, setPlayingImage } = playingSlice.actions;
 
-export const playFromHome = (query: string) => {
+export const playFromHome = (query: string, image: string) => {
   return async (dispatch: Dispatch) => {
     const result = await searchService.search(query, { single: true });
     dispatch(setPlaying(result));
+    dispatch(setPlayingImage(image));
   };
 };
 
