@@ -55,8 +55,10 @@
         "./src/reducers/searchReducer.ts",
         "./src/services/recommendations.ts",
         "./src/services/search.ts",
+        "./api/play.ts",
         "./api/search.ts",
         "./api/types.ts",
+        "./api/routes/play.ts",
         "./api/routes/search.ts",
         "./api/services/search.ts"
     ],
