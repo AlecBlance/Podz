@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "tsc:ts-node-config": "npm exec -- tsc --showConfig > tsconfig.tsnode.json",
-    "ts-node": "npm exec -- ts-node --project tsconfig.tsnode.json --esm --swc ./api/index.ts"
+    "ts-node": "NODE_ENV=development npm exec -- ts-node --project tsconfig.tsnode.json --esm --swc ./api/search.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

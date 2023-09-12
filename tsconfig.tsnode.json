@@ -52,9 +52,16 @@
         "./src/components /Pages/Search/index.tsx",
         "./src/hooks/index.ts",
         "./src/reducers/recommendationsReducer.ts",
-        "./src/services/recommendations.ts"
+        "./src/reducers/searchReducer.ts",
+        "./src/services/recommendations.ts",
+        "./src/services/search.ts",
+        "./api/search.ts",
+        "./api/types.ts",
+        "./api/routes/search.ts",
+        "./api/services/search.ts"
     ],
     "include": [
-        "src"
+        "src",
+        "api"
     ]
 }

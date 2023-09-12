@@ -1,5 +1,5 @@
 import { Innertube } from "youtubei.js";
-import { SearchResult } from "../types";
+import { SearchResponse, SearchResult } from "../types";
 
 const search = async (
   query: string
@@ -10,12 +10,18 @@ const search = async (
     sort_by: "relevance",
   });
   if (!musicResults.results) return { error: "No results found" };
-  return musicResults.results.map((result) => ({
-    id: result["id"],
-    title: result["title"]?.["text"],
-    author: result["author"]?.["name"],
-    image: result["thumbnails"]?.[0]["url"],
-  }));
+  const newResults = musicResults.results as unknown as SearchResponse[];
+  console.log(newResults);
+  return newResults
+    .filter((result) => result.title.text !== "Shorts")
+    .map((result) => {
+      return {
+        id: result.id,
+        title: result.title.text,
+        author: result.author?.name,
+        image: result.thumbnails?.[0].url,
+      };
+    });
 };
 
 export default { search };
