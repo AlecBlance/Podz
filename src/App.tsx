@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 const App = () => {
   const dispatch = useAppDispatch();
   const isLaptopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
-  const playing = useAppSelector((state) => state.playing);
+  const playing = useAppSelector((state) => state.playing.id);
 
   useEffect(() => {
     dispatch(initializeRecommendations());

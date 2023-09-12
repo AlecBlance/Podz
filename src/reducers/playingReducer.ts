@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SearchResult } from "../types";
 
-const initialState: string = "";
+const initialState: SearchResult = {
+  id: "",
+  title: "",
+  author: "",
+  image: "",
+};
 
 const playingSlice = createSlice({
   name: "playing",

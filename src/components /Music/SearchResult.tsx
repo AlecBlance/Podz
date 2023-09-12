@@ -9,7 +9,7 @@ const SearchResult = ({ track }: { track: SearchResult }) => {
   const dispatch = useAppDispatch();
 
   const play = () => {
-    dispatch(setPlaying(track.id));
+    dispatch(setPlaying(track));
   };
 
   return (
