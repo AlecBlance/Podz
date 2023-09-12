@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "tsc:ts-node-config": "npm exec -- tsc --showConfig > tsconfig.tsnode.json",
-    "ts-node": "NODE_ENV=development npm exec -- ts-node --project tsconfig.tsnode.json --esm --swc ./api/search.ts"
+    "api": "NODE_ENV=development npm exec -- ts-node --project tsconfig.tsnode.json --esm --swc ./api.devserver.ts",
+    "build:api": "npm run tsc:ts-node-config && npm run api"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -22,7 +23,8 @@
     "react-redux": "^8.1.2",
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.15.0",
-    "youtubei.js": "^6.4.0"
+    "youtubei.js": "^6.4.0",
+    "yt-audio-extractor": "^1.0.3"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.2",
