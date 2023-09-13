@@ -11,7 +11,6 @@ const search = async (
   });
   if (!musicResults.results) return { error: "No results found" };
   const newResults = musicResults.results as unknown as SearchResponse[];
-  console.log(newResults);
   return newResults
     .filter(
       (result) =>
