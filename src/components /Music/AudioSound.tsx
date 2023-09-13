@@ -3,7 +3,7 @@ import { useAudioContext } from "../../context/AudioContext";
 
 const AudioSound = () => {
   const playing = useAppSelector((state) => state.playing);
-  const audioRef = useAudioContext();
+  const { audioRef } = useAudioContext();
 
   return (
     <audio

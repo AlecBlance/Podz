@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import recommendationsReducer from "./reducers/recommendationsReducer";
 import searchReducer from "./reducers/searchReducer";
 import playingReducer from "./reducers/playingReducer";
+import audioReducer from "./reducers/audioReducer";
 
 const store = configureStore({
   reducer: {
     recommendations: recommendationsReducer,
     search: searchReducer,
     playing: playingReducer,
+    audio: audioReducer,
   },
 });
 
