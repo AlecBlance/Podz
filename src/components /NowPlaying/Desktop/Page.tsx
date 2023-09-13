@@ -14,7 +14,7 @@ const Page = ({
 }) => {
   const [ref, setRef] = useState<RefObject<HTMLAudioElement>>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const audioRef = useAudioContext();
+  const { audioRef } = useAudioContext();
 
   const hide = {
     top: "100dvh",

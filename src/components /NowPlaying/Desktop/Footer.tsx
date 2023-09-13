@@ -8,7 +8,7 @@ const Footer = () => {
   const playing = useAppSelector((state) => state.playing);
   const [ref, setRef] = useState<RefObject<HTMLAudioElement>>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const audioRef = useAudioContext();
+  const { audioRef } = useAudioContext();
 
   onpopstate = () => {
     if (!isPageVisible) return;
