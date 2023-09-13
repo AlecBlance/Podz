@@ -1,6 +1,6 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import Page from "./Page";
-import { useAppSelector, useFavorite } from "../../../hooks";
+import { useAppSelector, useConvertToTime, useFavorite } from "../../../hooks";
 import { useAudioContext } from "../../../context/AudioContext";
 
 const Footer = () => {
@@ -8,12 +8,16 @@ const Footer = () => {
   const playing = useAppSelector((state) => state.playing);
   const inputRef = useRef<HTMLInputElement>(null);
   const { audioRef, updateAudioTime, play, pause } = useAudioContext();
-  const pageRef = useRef<HTMLInputElement>(null);
+  const pageRef = useRef<{
+    input: RefObject<HTMLInputElement>;
+    time: RefObject<HTMLParagraphElement>;
+  }>(null);
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
   const isLiked = useAppSelector((state) =>
     state.library.some((liked) => liked.id === playing.id)
   );
   const [like, unlike] = useFavorite(playing);
+  const convertToTime = useConvertToTime();
 
   onpopstate = () => {
     if (!isPageVisible) return;
@@ -24,15 +28,17 @@ const Footer = () => {
   useEffect(() => {
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
-    const pageCurrentInput = pageRef.current;
+    const pageCurrentInput = pageRef.current?.input.current;
+    const pageCurrentTime = pageRef.current?.time.current;
     if (!(currentAudio && playing.id)) return;
     currentAudio.ontimeupdate = () => {
-      if (!(currentInput && pageCurrentInput)) return;
+      if (!(currentInput && pageCurrentInput && pageCurrentTime)) return;
       const currentTime = currentAudio.currentTime.toString();
       currentInput.value = currentTime;
-      pageRef.current.value = currentTime;
+      pageCurrentInput.value = currentTime;
+      pageCurrentTime.innerText = convertToTime(parseInt(currentTime));
     };
-  }, [audioRef, playing.id]);
+  }, [audioRef, convertToTime, playing.id]);
 
   return (
     <div className="bg-[#131313] flex flex-col">

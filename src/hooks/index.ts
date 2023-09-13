@@ -18,3 +18,12 @@ export const useFavorite = (playing: SearchResult) => {
 
   return [like, unlike];
 };
+
+export const useConvertToTime = () => {
+  return (total: number) => {
+    const minutes = Math.floor(total / 60);
+    const seconds = Math.floor(total) % 60;
+    const padTo2Digits = (num: number) => num.toString().padStart(2, "0");
+    return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`;
+  };
+};

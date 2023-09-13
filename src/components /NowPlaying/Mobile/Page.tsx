@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { SearchResult } from "../../../types";
 import { useAudioContext } from "../../../context/AudioContext";
 import { ChangeEvent, useEffect, useRef } from "react";
-import { useAppSelector, useFavorite } from "../../../hooks";
+import { useAppSelector, useConvertToTime, useFavorite } from "../../../hooks";
 
 const Page = ({
   isPageVisible,
@@ -19,24 +19,23 @@ const Page = ({
   const isLiked = useAppSelector((state) =>
     state.library.some((liked) => liked.id === playing.id)
   );
+  const time = useRef<HTMLParagraphElement>(null);
   const [like, unlike] = useFavorite(playing);
-
-  const hide = {
-    top: "100dvh",
-  };
-
-  const show = {
-    top: "0",
-  };
+  const hide = { top: "100dvh" };
+  const show = { top: "0" };
+  const convertToTime = useConvertToTime();
 
   useEffect(() => {
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
-    if (!(currentAudio && currentInput)) return;
+    const currentTime = time.current;
+    if (!(currentAudio && currentInput && currentTime)) return;
     currentAudio.ontimeupdate = () => {
       currentInput.value = currentAudio.currentTime.toString();
+      const time = convertToTime(currentAudio.currentTime);
+      currentTime.innerText = time;
     };
-  }, [audioRef]);
+  }, [audioRef, convertToTime]);
 
   return (
     <motion.div
@@ -120,8 +119,10 @@ const Page = ({
             }
           />
           <div className="flex justify-between mt-2">
-            <p className="text-xs text-custom-card-artist ">2:01</p>
-            <p className="text-xs text-custom-card-artist ">3:44</p>
+            <p className="text-xs text-custom-card-artist" ref={time}></p>
+            <p className="text-xs text-custom-card-artist ">
+              {convertToTime(playing.duration)}
+            </p>
           </div>
         </div>
         <div className="flex justify-center px-5 pb-10">

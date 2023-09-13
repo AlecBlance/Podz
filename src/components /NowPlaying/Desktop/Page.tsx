@@ -1,11 +1,17 @@
 import { motion } from "framer-motion";
 import { SearchResult } from "../../../types";
-import { ChangeEvent, forwardRef } from "react";
+import {
+  ChangeEvent,
+  RefObject,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { useAudioContext } from "../../../context/AudioContext";
-import { useAppSelector, useFavorite } from "../../../hooks";
+import { useAppSelector, useConvertToTime, useFavorite } from "../../../hooks";
 
 const Page = forwardRef<
-  HTMLInputElement,
+  { input: RefObject<HTMLInputElement>; time: RefObject<HTMLParagraphElement> },
   {
     isPageVisible: boolean;
     setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +24,9 @@ const Page = forwardRef<
     state.library.some((liked) => liked.id === playing.id)
   );
   const [like, unlike] = useFavorite(playing);
+  const convertToTime = useConvertToTime();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const time = useRef<HTMLParagraphElement>(null);
 
   const hide = {
     top: "100dvh",
@@ -26,6 +35,11 @@ const Page = forwardRef<
   const show = {
     top: "0",
   };
+
+  useImperativeHandle(ref, () => ({
+    input: inputRef,
+    time: time,
+  }));
 
   return (
     <motion.div
@@ -67,7 +81,7 @@ const Page = forwardRef<
           </div>
         </div>
         <div className="px-5 flex items-center mb-3">
-          <p className="text-xs text-custom-card-artist mr-3">2:01</p>
+          <p className="text-xs text-custom-card-artist mr-3" ref={time}></p>
           <input
             type="range"
             min="1"
@@ -76,9 +90,11 @@ const Page = forwardRef<
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               updateAudioTime(parseInt(e.target.value))
             }
-            ref={ref}
+            ref={inputRef}
           />
-          <p className="text-xs text-custom-card-artist ml-3">3:44</p>
+          <p className="text-xs text-custom-card-artist ml-3">
+            {convertToTime(playing.duration)}
+          </p>
         </div>
         <div className="flex items-center">
           <div className="w-1/3">
