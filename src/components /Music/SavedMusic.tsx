@@ -1,5 +1,6 @@
 import { useAppDispatch, useFavorite } from "../../hooks";
 import { setPlaying } from "../../reducers/playingReducer";
+import { insertRecent } from "../../reducers/recentReducer";
 import { SearchResult } from "../../types";
 
 const SavedMusic = ({ track }: { track: SearchResult }) => {
@@ -8,6 +9,7 @@ const SavedMusic = ({ track }: { track: SearchResult }) => {
 
   const play = () => {
     dispatch(setPlaying(track));
+    dispatch(insertRecent(track));
   };
   return (
     <div className="flex items-center py-2 cursor-pointer hover:bg-slate-800 px-5">

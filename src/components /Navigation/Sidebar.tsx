@@ -1,40 +1,30 @@
 import { Link, useMatch } from "react-router-dom";
 import RecentMusic from "../Music/RecentMusic";
-import { useRef, useState } from "react";
+import { useAppSelector } from "../../hooks";
+import { useEffect, useRef, useState } from "react";
 
 const Sidebar = () => {
   const isHome = useMatch("/");
   const isLibrary = useMatch("/library");
   const isSearch = useMatch("/search");
-  const childDiv = useRef(null);
-  // const musicCard = useRef(null);
-  // const [limit, setLimit] = useState(0);
-  const [recent] = useState([
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-    { title: "a", artist: "a", image: "a" },
-  ]);
+  const recent = useAppSelector((state) => state.recent);
 
-  // useEffect(() => {
-  //   if (childDiv.current && musicCard.current) {
-  //     const child = childDiv.current["clientHeight"];
-  //     const musicInnerHeight = musicCard.current["clientHeight"];
-  //     const musicMargin = parseInt(
-  //       window.getComputedStyle(musicCard.current)["marginTop"]
-  //     );
-  //     setLimit(child / (musicInnerHeight + musicMargin));
-  //   }
-  // }, [setLimit]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const section = sectionRef.current;
+  const [limit, setLimit] = useState<number>(20);
+
+  const getLimit = (height: number) => {
+    const shouldBeLimit = Math.floor(height / 60);
+    return height % 60 ? shouldBeLimit - 1 : shouldBeLimit;
+  };
+
+  useEffect(() => {
+    if (!section) return;
+    setLimit(getLimit(section.offsetHeight));
+    window.addEventListener("resize", () => {
+      setLimit(getLimit(section.offsetHeight));
+    });
+  }, [section]);
 
   return (
     <div className="bg-[#252525] w-1/4 flex flex-col">
@@ -159,10 +149,17 @@ const Sidebar = () => {
           </svg>
           <p className="text-sm">Your Recent Podz</p>
         </div>
-        <div ref={childDiv} className="h-full">
-          {recent.map((each, i) => (
-            <RecentMusic key={i} title={each.title} artist={each.artist} />
-          ))}
+        <div className="h-full" ref={sectionRef}>
+          {recent
+            .slice()
+            .reverse()
+            .slice(0, limit)
+            .map((played) => (
+              <RecentMusic
+                key={`${played.id}-${Math.random()}`}
+                played={played}
+              />
+            ))}
         </div>
       </div>
     </div>

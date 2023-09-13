@@ -4,6 +4,7 @@ import searchReducer from "./reducers/searchReducer";
 import playingReducer from "./reducers/playingReducer";
 import audioReducer from "./reducers/audioReducer";
 import libraryReducer from "./reducers/libraryReducer";
+import recentReducer from "./reducers/recentReducer";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     playing: playingReducer,
     audio: audioReducer,
     library: libraryReducer,
+    recent: recentReducer,
   },
 });
 
