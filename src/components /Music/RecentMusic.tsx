@@ -1,11 +1,20 @@
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setPlaying } from "../../reducers/playingReducer";
 import { SearchResult } from "../../types";
 
 const RecentMusic = ({ played }: { played: SearchResult }) => {
   const playing = useAppSelector((state) => state.playing.id);
+  const dispatch = useAppDispatch();
+
+  const play = () => {
+    dispatch(setPlaying(played));
+  };
 
   return (
-    <div className="text-white py-2 px-3 flex items-center cursor-pointer hover:bg-slate-800">
+    <div
+      className="text-white py-2 px-3 flex items-center cursor-pointer hover:bg-slate-800"
+      onClick={play}
+    >
       <div
         className="bg-slate-400 w-11 h-11 shrink-0 mr-2 bg-center bg-cover "
         style={{ backgroundImage: `url('${played.image}')` }}
