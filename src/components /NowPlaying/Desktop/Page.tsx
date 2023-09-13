@@ -81,7 +81,10 @@ const Page = forwardRef<
           </div>
         </div>
         <div className="px-5 flex items-center mb-3">
-          <p className="text-xs text-custom-card-artist mr-3" ref={time}></p>
+          <p
+            className="text-xs text-custom-card-artist mr-3 w-7"
+            ref={time}
+          ></p>
           <input
             type="range"
             min="1"
