@@ -25,24 +25,14 @@ const Page = ({
   };
 
   const updateAudioTime = () => {
-    if (
-      !(ref && ref.current && "current" in inputRef && inputRef?.current?.value)
-    )
-      return;
+    if (!(ref && ref.current && inputRef.current)) return;
     ref.current.currentTime = parseInt(inputRef.current?.value);
   };
 
   useEffect(() => {
     setRef(audioRef);
     audioRef?.current?.addEventListener("timeupdate", () => {
-      if (
-        !(
-          inputRef &&
-          "current" in inputRef &&
-          inputRef.current &&
-          audioRef?.current?.currentTime
-        )
-      )
+      if (!(inputRef && inputRef.current && audioRef.current?.currentTime))
         return;
       inputRef.current.value = audioRef?.current?.currentTime.toString();
     });
@@ -112,7 +102,6 @@ const Page = ({
             max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
             ref={inputRef}
-            value="1"
             onChange={updateAudioTime}
           />
           <div className="flex justify-between mt-2">
