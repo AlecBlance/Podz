@@ -36,7 +36,16 @@ const Page = ({
         return;
       inputRef.current.value = audioRef?.current?.currentTime.toString();
     });
-  }, [audioRef]);
+    if (audioRef.current) {
+      audioRef.current.onended = () => {
+        if (!audioRef.current) return;
+        const saved = audioRef.current.src;
+        audioRef.current.src = "";
+        audioRef.current.src = saved;
+        audioRef.current.pause();
+      };
+    }
+  }, [audioRef, playing.duration]);
 
   return (
     <motion.div
