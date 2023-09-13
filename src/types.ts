@@ -9,6 +9,7 @@ export interface MusicCardProps {
 export interface SectionProps {
   children: React.ReactNode;
   title: string;
+  className?: string;
 }
 
 export interface SpotifyClientCredentials {
