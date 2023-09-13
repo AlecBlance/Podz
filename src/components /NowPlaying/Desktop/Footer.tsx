@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import { useAppSelector } from "../../../hooks";
+import { useAudioContext } from "../../../context/AudioContext";
 
 const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
   const playing = useAppSelector((state) => state.playing);
+  const [ref, setRef] = useState<RefObject<HTMLAudioElement>>();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const audioRef = useAudioContext();
 
   onpopstate = () => {
     if (!isPageVisible) return;
@@ -12,14 +16,45 @@ const Footer = () => {
     history.go(1);
   };
 
+  const updateAudioTime = () => {
+    if (
+      !(ref && ref.current && "current" in inputRef && inputRef?.current?.value)
+    )
+      return;
+    ref.current.currentTime = parseInt(inputRef.current?.value);
+  };
+
+  useEffect(() => {
+    console.log(audioRef);
+    setRef(audioRef);
+    audioRef?.current?.addEventListener("timeupdate", () => {
+      if (
+        !(
+          inputRef &&
+          "current" in inputRef &&
+          inputRef.current &&
+          audioRef?.current?.currentTime
+        )
+      )
+        return;
+      inputRef.current.value = audioRef?.current?.currentTime.toString();
+    });
+  }, [audioRef]);
+
   return (
     <div className="bg-[#131313] flex flex-col">
-      <input
-        type="range"
-        className="slider w-full h-1 z-10"
-        min="1"
-        max={playing.duration}
-      />
+      {playing.id && (
+        <input
+          type="range"
+          className="slider w-full h-1 z-10"
+          min="1"
+          max={playing.duration}
+          value={audioRef.current?.currentTime}
+          onChange={updateAudioTime}
+          ref={inputRef}
+        />
+      )}
+
       <div className="flex">
         <div className="flex items-center w-1/3 h-16">
           {playing.id && (

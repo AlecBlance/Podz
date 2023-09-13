@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { initializeRecommendations } from "./reducers/recommendationsReducer";
 import { useAppDispatch } from "./hooks";
 import AudioSound from "./components /Music/AudioSound";
+import { AudioContextProvider } from "./context/AudioContext";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +37,11 @@ const App = () => {
         </div>
         {!isLaptopScreen && <MobileNavigation />}
       </div>
-      {isLaptopScreen && <Footer />}
+      {isLaptopScreen && (
+        <AudioContextProvider>
+          <Footer />
+        </AudioContextProvider>
+      )}
       <AudioSound />
     </div>
   );

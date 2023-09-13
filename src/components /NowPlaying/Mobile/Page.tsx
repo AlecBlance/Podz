@@ -108,11 +108,11 @@ const Page = ({
         <div className="px-5">
           <input
             type="range"
-            min="0"
+            min="1"
             max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
             ref={inputRef}
-            value="0"
+            value="1"
             onChange={updateAudioTime}
           />
           <div className="flex justify-between mt-2">

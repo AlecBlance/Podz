@@ -5,8 +5,6 @@ const AudioSound = () => {
   const playing = useAppSelector((state) => state.playing);
   const audioRef = useAudioContext();
 
-  if (!playing.id) return null;
-
   return (
     <audio
       className="hidden"
