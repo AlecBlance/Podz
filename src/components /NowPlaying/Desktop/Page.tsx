@@ -1,19 +1,17 @@
 import { motion } from "framer-motion";
 import { SearchResult } from "../../../types";
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, forwardRef } from "react";
 import { useAudioContext } from "../../../context/AudioContext";
 
-const Page = ({
-  isPageVisible,
-  setIsPageVisible,
-  playing,
-}: {
-  isPageVisible: boolean;
-  setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  playing: SearchResult;
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { audioRef, updateAudioTime } = useAudioContext();
+const Page = forwardRef<
+  HTMLInputElement,
+  {
+    isPageVisible: boolean;
+    setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    playing: SearchResult;
+  }
+>(({ isPageVisible, setIsPageVisible, playing }, ref) => {
+  const { updateAudioTime } = useAudioContext();
 
   const hide = {
     top: "100dvh",
@@ -22,15 +20,6 @@ const Page = ({
   const show = {
     top: "0",
   };
-
-  useEffect(() => {
-    const currentAudio = audioRef.current;
-    const currentInput = inputRef.current;
-    if (!(currentAudio && currentInput)) return;
-    currentAudio.ontimeupdate = () => {
-      currentInput.value = currentAudio.currentTime.toString();
-    };
-  }, [audioRef, playing.duration]);
 
   return (
     <motion.div
@@ -81,7 +70,7 @@ const Page = ({
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               updateAudioTime(parseInt(e.target.value))
             }
-            ref={inputRef}
+            ref={ref}
           />
           <p className="text-xs text-custom-card-artist ml-3">3:44</p>
         </div>
@@ -138,5 +127,5 @@ const Page = ({
       </div>
     </motion.div>
   );
-};
+});
 export default Page;

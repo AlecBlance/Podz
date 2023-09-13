@@ -8,6 +8,7 @@ const Footer = () => {
   const playing = useAppSelector((state) => state.playing);
   const inputRef = useRef<HTMLInputElement>(null);
   const { audioRef, updateAudioTime } = useAudioContext();
+  const pageRef = useRef<HTMLInputElement>(null);
 
   onpopstate = () => {
     if (!isPageVisible) return;
@@ -18,10 +19,13 @@ const Footer = () => {
   useEffect(() => {
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
+    const pageCurrentInput = pageRef.current;
     if (!(currentAudio && playing.id)) return;
     currentAudio.ontimeupdate = () => {
-      if (!currentInput) return;
-      currentInput.value = currentAudio.currentTime.toString();
+      if (!(currentInput && pageCurrentInput)) return;
+      const currentTime = currentAudio.currentTime.toString();
+      currentInput.value = currentTime;
+      pageRef.current.value = currentTime;
     };
   }, [audioRef, playing.id]);
 
@@ -122,6 +126,7 @@ const Footer = () => {
         isPageVisible={isPageVisible}
         setIsPageVisible={setIsPageVisible}
         playing={playing}
+        ref={pageRef}
       />
     </div>
   );
