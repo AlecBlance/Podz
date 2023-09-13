@@ -1,6 +1,6 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
 import Page from "./Page";
-import { useAppSelector } from "../../../hooks";
+import { useAppSelector, useConvertToTime, useFavorite } from "../../../hooks";
 import { useAudioContext } from "../../../context/AudioContext";
 
 const Footer = () => {
@@ -8,8 +8,16 @@ const Footer = () => {
   const playing = useAppSelector((state) => state.playing);
   const inputRef = useRef<HTMLInputElement>(null);
   const { audioRef, updateAudioTime, play, pause } = useAudioContext();
-  const pageRef = useRef<HTMLInputElement>(null);
+  const pageRef = useRef<{
+    input: RefObject<HTMLInputElement>;
+    time: RefObject<HTMLParagraphElement>;
+  }>(null);
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
+  const isLiked = useAppSelector((state) =>
+    state.library.some((liked) => liked.id === playing.id)
+  );
+  const [like, unlike] = useFavorite(playing);
+  const convertToTime = useConvertToTime();
 
   onpopstate = () => {
     if (!isPageVisible) return;
@@ -20,15 +28,17 @@ const Footer = () => {
   useEffect(() => {
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
-    const pageCurrentInput = pageRef.current;
+    const pageCurrentInput = pageRef.current?.input.current;
+    const pageCurrentTime = pageRef.current?.time.current;
     if (!(currentAudio && playing.id)) return;
     currentAudio.ontimeupdate = () => {
-      if (!(currentInput && pageCurrentInput)) return;
+      if (!(currentInput && pageCurrentInput && pageCurrentTime)) return;
       const currentTime = currentAudio.currentTime.toString();
       currentInput.value = currentTime;
-      pageRef.current.value = currentTime;
+      pageCurrentInput.value = currentTime;
+      pageCurrentTime.innerText = convertToTime(parseInt(currentTime));
     };
-  }, [audioRef, playing.id]);
+  }, [audioRef, convertToTime, playing.id]);
 
   return (
     <div className="bg-[#131313] flex flex-col">
@@ -72,14 +82,33 @@ const Footer = () => {
                 </div>
               </div>
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-5 h-5 text-custom-vibrant-blue shrink-0 ml-4"
-                >
-                  <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                </svg>
+                {isLiked ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-5 h-5 text-custom-vibrant-blue shrink-0 ml-4"
+                    onClick={unlike}
+                  >
+                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-5 h-5   ml-4 text-custom-card-artist"
+                    onClick={like}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                    />
+                  </svg>
+                )}
               </div>
             </>
           )}
@@ -129,8 +158,8 @@ const Footer = () => {
             </svg>
           )}
         </div>
-        <div className="flex items-center pr-5">
-          <svg
+        <div className="flex items-center pr-5 w-1/4">
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -144,7 +173,7 @@ const Footer = () => {
               d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
             />
           </svg>
-          <input type="range" className="slider h-1" />
+          <input type="range" className="slider h-1" /> */}
         </div>
       </div>
       <Page

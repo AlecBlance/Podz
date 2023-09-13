@@ -3,6 +3,8 @@ import recommendationsReducer from "./reducers/recommendationsReducer";
 import searchReducer from "./reducers/searchReducer";
 import playingReducer from "./reducers/playingReducer";
 import audioReducer from "./reducers/audioReducer";
+import libraryReducer from "./reducers/libraryReducer";
+import recentReducer from "./reducers/recentReducer";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ const store = configureStore({
     search: searchReducer,
     playing: playingReducer,
     audio: audioReducer,
+    library: libraryReducer,
+    recent: recentReducer,
   },
 });
 

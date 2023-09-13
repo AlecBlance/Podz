@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { SearchResult } from "../../../types";
 import { useAudioContext } from "../../../context/AudioContext";
 import { ChangeEvent, useEffect, useRef } from "react";
-import { useAppSelector } from "../../../hooks";
+import { useAppSelector, useConvertToTime, useFavorite } from "../../../hooks";
 
 const Page = ({
   isPageVisible,
@@ -16,23 +16,26 @@ const Page = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const { audioRef, play, pause, updateAudioTime } = useAudioContext();
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
-
-  const hide = {
-    top: "100dvh",
-  };
-
-  const show = {
-    top: "0",
-  };
+  const isLiked = useAppSelector((state) =>
+    state.library.some((liked) => liked.id === playing.id)
+  );
+  const time = useRef<HTMLParagraphElement>(null);
+  const [like, unlike] = useFavorite(playing);
+  const hide = { top: "100dvh" };
+  const show = { top: "0" };
+  const convertToTime = useConvertToTime();
 
   useEffect(() => {
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
-    if (!(currentAudio && currentInput)) return;
+    const currentTime = time.current;
+    if (!(currentAudio && currentInput && currentTime)) return;
     currentAudio.ontimeupdate = () => {
       currentInput.value = currentAudio.currentTime.toString();
+      const time = convertToTime(currentAudio.currentTime);
+      currentTime.innerText = time;
     };
-  }, [audioRef]);
+  }, [audioRef, convertToTime]);
 
   return (
     <motion.div
@@ -75,20 +78,33 @@ const Page = ({
             </h1>
           </div>
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6   text-custom-card-artist"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-              />
-            </svg>
+            {isLiked ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6 text-custom-vibrant-blue"
+                onClick={unlike}
+              >
+                <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6   text-custom-card-artist"
+                onClick={like}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                />
+              </svg>
+            )}
           </div>
         </div>
         <div className="px-5">
@@ -103,8 +119,10 @@ const Page = ({
             }
           />
           <div className="flex justify-between mt-2">
-            <p className="text-xs text-custom-card-artist ">2:01</p>
-            <p className="text-xs text-custom-card-artist ">3:44</p>
+            <p className="text-xs text-custom-card-artist" ref={time}></p>
+            <p className="text-xs text-custom-card-artist ">
+              {convertToTime(playing.duration)}
+            </p>
           </div>
         </div>
         <div className="flex justify-center px-5 pb-10">

@@ -11,6 +11,8 @@ import { initializeRecommendations } from "./reducers/recommendationsReducer";
 import { useAppDispatch } from "./hooks";
 import AudioSound from "./components /Music/AudioSound";
 import { AudioContextProvider } from "./context/AudioContext";
+import { initializeLibrary } from "./reducers/libraryReducer";
+import { initializeRecent } from "./reducers/recentReducer";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +20,8 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeRecommendations());
+    dispatch(initializeLibrary());
+    dispatch(initializeRecent());
   });
 
   return (

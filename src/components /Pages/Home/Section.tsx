@@ -7,7 +7,9 @@ const Section = (props: SectionProps) => {
       <h1 className="text-custom-neutrals-offwhite font-medium  ">
         {props.title}
       </h1>
-      <div className="mt-3 flex overflow-x-auto lg:-ml-4 scrollbar-hide">
+      <div
+        className={`mt-3 flex overflow-x-auto lg:-ml-4 scrollbar-hide ${props.className}`}
+      >
         {props.children}
       </div>
     </div>
