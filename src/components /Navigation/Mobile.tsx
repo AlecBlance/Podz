@@ -1,14 +1,18 @@
+import { memo } from "react";
 import PlayingNow from "../NowPlaying/Mobile/Footer";
 import { Link, useMatch } from "react-router-dom";
+import { AudioContextProvider } from "../../context/AudioContext";
 
-const MobileNavigation = () => {
+const MobileNavigation = memo(() => {
   const isHome = useMatch("/");
   const isSearch = useMatch("/search");
   const isLibrary = useMatch("/library");
 
   return (
     <div className="bg-[#131313] text-custom-neutrals-offwhite">
-      <PlayingNow />
+      <AudioContextProvider>
+        <PlayingNow />
+      </AudioContextProvider>
       <div className="border-t border-slate-100/5 px-5 py-3 justify-center flex items-center">
         <Link to="/">
           <svg
@@ -67,5 +71,5 @@ const MobileNavigation = () => {
       </div>
     </div>
   );
-};
+});
 export default MobileNavigation;

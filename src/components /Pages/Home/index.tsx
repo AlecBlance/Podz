@@ -15,10 +15,8 @@ const Home = () => {
         <Section key={recommendation.id} title={recommendation.name}>
           {recommendation.tracks.map((track) => (
             <MusicCard
-              key={track.id}
-              title={track.name}
-              artist={track.artistName.join(", ")}
-              image={track.imageUrl}
+              key={`${track.id}-${Math.floor(Math.random() * 100)}`}
+              track={track}
             ></MusicCard>
           ))}
         </Section>

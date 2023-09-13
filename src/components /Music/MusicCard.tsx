@@ -1,8 +1,22 @@
-import { MusicCardProps } from "../../types";
+import { useAppDispatch } from "../../hooks";
+import { playFromHome } from "../../reducers/playingReducer";
+import { RecommendationsTracks } from "../../types";
 
-const MusicCard = ({ title, artist, image }: MusicCardProps) => {
+const MusicCard = ({ track }: { track: RecommendationsTracks }) => {
+  const title = track.name;
+  const artist = track.artistName.join(", ");
+  const image = track.imageUrl;
+  const dispatch = useAppDispatch();
+
+  const play = () => {
+    dispatch(playFromHome(`${title} ${artist}`, image));
+  };
+
   return (
-    <div className="lg:hover:bg-slate-800 flex justify-center lg:p-4 cursor-pointer rounded-lg">
+    <div
+      className="lg:hover:bg-slate-800 flex justify-center lg:p-4 cursor-pointer rounded-lg"
+      onClick={play}
+    >
       <div className="w-32 mr-4 lg:m-0">
         {image ? (
           <img

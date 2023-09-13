@@ -3,6 +3,7 @@ export interface SearchResult {
   title: string;
   author: string;
   image: string;
+  duration: number;
 }
 
 export interface SearchResponse {
@@ -16,4 +17,7 @@ export interface SearchResponse {
   thumbnails: {
     url: string;
   }[];
+  duration: {
+    seconds: number;
+  };
 }

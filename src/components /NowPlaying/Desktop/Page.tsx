@@ -1,12 +1,20 @@
 import { motion } from "framer-motion";
+import { SearchResult } from "../../../types";
+import { ChangeEvent, useEffect, useRef } from "react";
+import { useAudioContext } from "../../../context/AudioContext";
 
 const Page = ({
   isPageVisible,
   setIsPageVisible,
+  playing,
 }: {
   isPageVisible: boolean;
   setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  playing: SearchResult;
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { audioRef, updateAudioTime } = useAudioContext();
+
   const hide = {
     top: "100dvh",
   };
@@ -14,6 +22,15 @@ const Page = ({
   const show = {
     top: "0",
   };
+
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+    const currentInput = inputRef.current;
+    if (!(currentAudio && currentInput)) return;
+    currentAudio.ontimeupdate = () => {
+      currentInput.value = currentAudio.currentTime.toString();
+    };
+  }, [audioRef, playing.duration]);
 
   return (
     <motion.div
@@ -39,10 +56,19 @@ const Page = ({
       </div>
       <div className="mb-10 h-full flex justify-end flex-col">
         <div className="px-5 pb-2 mb-3 flex items-end">
-          <div className="bg-slate-400 w-28 h-28 mr-5"></div>
+          <div
+            className={`${
+              playing.image && "bg-slate-400"
+            } bg-center bg-cover w-28 h-28 mr-5`}
+            style={{
+              backgroundImage: playing.image && `url('${playing.image}')`,
+            }}
+          ></div>
           <div>
-            <h1 className="text-custom-neutrals-offwhite ">Easy On Me</h1>
-            <h1 className="text-sm text-custom-card-artist mt-1 ">Adele</h1>
+            <h1 className="text-custom-neutrals-offwhite ">{playing.title}</h1>
+            <h1 className="text-sm text-custom-card-artist mt-1 ">
+              {playing.author}
+            </h1>
           </div>
         </div>
         <div className="px-5 flex items-center mb-3">
@@ -50,8 +76,12 @@ const Page = ({
           <input
             type="range"
             min="1"
-            max="100"
+            max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              updateAudioTime(parseInt(e.target.value))
+            }
+            ref={inputRef}
           />
           <p className="text-xs text-custom-card-artist ml-3">3:44</p>
         </div>
