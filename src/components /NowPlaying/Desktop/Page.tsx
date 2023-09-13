@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { SearchResult } from "../../../types";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { useAudioContext } from "../../../context/AudioContext";
 
 const Page = ({
@@ -12,9 +12,8 @@ const Page = ({
   setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
   playing: SearchResult;
 }) => {
-  const [ref, setRef] = useState<RefObject<HTMLAudioElement>>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { audioRef } = useAudioContext();
+  const { audioRef, updateAudioTime } = useAudioContext();
 
   const hide = {
     top: "100dvh",
@@ -24,30 +23,14 @@ const Page = ({
     top: "0",
   };
 
-  const updateAudioTime = () => {
-    if (
-      !(ref && ref.current && "current" in inputRef && inputRef?.current?.value)
-    )
-      return;
-    ref.current.currentTime = parseInt(inputRef.current?.value);
-  };
-
   useEffect(() => {
-    console.log(audioRef);
-    setRef(audioRef);
-    audioRef?.current?.addEventListener("timeupdate", () => {
-      if (
-        !(
-          inputRef &&
-          "current" in inputRef &&
-          inputRef.current &&
-          audioRef?.current?.currentTime
-        )
-      )
-        return;
-      inputRef.current.value = audioRef?.current?.currentTime.toString();
-    });
-  }, [audioRef]);
+    const currentAudio = audioRef.current;
+    const currentInput = inputRef.current;
+    if (!(currentAudio && currentInput)) return;
+    currentAudio.ontimeupdate = () => {
+      currentInput.value = currentAudio.currentTime.toString();
+    };
+  }, [audioRef, playing.duration]);
 
   return (
     <motion.div
@@ -95,7 +78,9 @@ const Page = ({
             min="1"
             max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
-            onChange={updateAudioTime}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              updateAudioTime(parseInt(e.target.value))
+            }
             ref={inputRef}
           />
           <p className="text-xs text-custom-card-artist ml-3">3:44</p>

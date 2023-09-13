@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import { useAppSelector } from "../../../hooks";
 import { useAudioContext } from "../../../context/AudioContext";
@@ -6,9 +6,8 @@ import { useAudioContext } from "../../../context/AudioContext";
 const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
   const playing = useAppSelector((state) => state.playing);
-  const [ref, setRef] = useState<RefObject<HTMLAudioElement>>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { audioRef } = useAudioContext();
+  const { audioRef, updateAudioTime } = useAudioContext();
 
   onpopstate = () => {
     if (!isPageVisible) return;
@@ -16,17 +15,8 @@ const Footer = () => {
     history.go(1);
   };
 
-  const updateAudioTime = () => {
-    if (
-      !(ref && ref.current && "current" in inputRef && inputRef?.current?.value)
-    )
-      return;
-    ref.current.currentTime = parseInt(inputRef.current?.value);
-  };
-
   useEffect(() => {
     console.log(audioRef);
-    setRef(audioRef);
     audioRef?.current?.addEventListener("timeupdate", () => {
       if (
         !(
@@ -41,6 +31,16 @@ const Footer = () => {
     });
   }, [audioRef]);
 
+  useEffect(() => {
+    const currentAudio = audioRef.current;
+    const currentInput = inputRef.current;
+    if (!(currentAudio && playing.id)) return;
+    currentAudio.ontimeupdate = () => {
+      if (!currentInput) return;
+      currentInput.value = currentAudio.currentTime.toString();
+    };
+  }, [audioRef, playing.id]);
+
   return (
     <div className="bg-[#131313] flex flex-col">
       {playing.id && (
@@ -50,7 +50,9 @@ const Footer = () => {
           min="1"
           max={playing.duration}
           value={audioRef.current?.currentTime}
-          onChange={updateAudioTime}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            updateAudioTime(parseInt(e.target.value))
+          }
           ref={inputRef}
         />
       )}

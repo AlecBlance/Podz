@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { SearchResult } from "../../../types";
 import { useAudioContext } from "../../../context/AudioContext";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { useAppSelector } from "../../../hooks";
 
 const Page = ({
@@ -13,9 +13,8 @@ const Page = ({
   setIsPageVisible: React.Dispatch<React.SetStateAction<boolean>>;
   playing: SearchResult;
 }) => {
-  const [ref, setRef] = useState<RefObject<HTMLAudioElement>>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { audioRef, play, pause } = useAudioContext();
+  const { audioRef, play, pause, updateAudioTime } = useAudioContext();
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
 
   const hide = {
@@ -26,20 +25,14 @@ const Page = ({
     top: "0",
   };
 
-  const updateAudioTime = () => {
-    if (!(ref && ref.current && inputRef.current)) return;
-    ref.current.currentTime = parseInt(inputRef.current?.value);
-  };
-
   useEffect(() => {
-    setRef(audioRef);
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
     if (!(currentAudio && currentInput)) return;
     currentAudio.ontimeupdate = () => {
       currentInput.value = currentAudio.currentTime.toString();
     };
-  }, [audioRef, playing.duration]);
+  }, [audioRef]);
 
   return (
     <motion.div
@@ -105,7 +98,9 @@ const Page = ({
             max={playing.duration}
             className="w-full h-1 bg-custom-neutrals-offwhite rounded-lg slider accent-custom-vibrant-blue"
             ref={inputRef}
-            onChange={updateAudioTime}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              updateAudioTime(parseInt(e.target.value))
+            }
           />
           <div className="flex justify-between mt-2">
             <p className="text-xs text-custom-card-artist ">2:01</p>

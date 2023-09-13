@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Page from "./Page";
 import { useAppSelector } from "../../../hooks";
 import { useAudioContext } from "../../../context/AudioContext";
@@ -6,7 +6,7 @@ import { useAudioContext } from "../../../context/AudioContext";
 const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
   const playing = useAppSelector((state) => state.playing);
-  const { audioRef, pause, play } = useAudioContext();
+  const { pause, play } = useAudioContext();
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
 
   onpopstate = () => {
@@ -14,17 +14,6 @@ const Footer = () => {
     setIsPageVisible(false);
     history.go(1);
   };
-
-  useEffect(() => {
-    const currentAudio = audioRef.current;
-    if (!currentAudio) return;
-    currentAudio.onended = () => {
-      const savePrev = currentAudio.src;
-      currentAudio.src = "";
-      currentAudio.src = savePrev;
-      pause();
-    };
-  }, [audioRef, pause]);
 
   if (!playing.id) return null;
 
