@@ -16,22 +16,6 @@ const Footer = () => {
   };
 
   useEffect(() => {
-    console.log(audioRef);
-    audioRef?.current?.addEventListener("timeupdate", () => {
-      if (
-        !(
-          inputRef &&
-          "current" in inputRef &&
-          inputRef.current &&
-          audioRef?.current?.currentTime
-        )
-      )
-        return;
-      inputRef.current.value = audioRef?.current?.currentTime.toString();
-    });
-  }, [audioRef]);
-
-  useEffect(() => {
     const currentAudio = audioRef.current;
     const currentInput = inputRef.current;
     if (!(currentAudio && playing.id)) return;
