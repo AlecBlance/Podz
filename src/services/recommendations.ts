@@ -30,12 +30,15 @@ const getTracks = async (id: string): Promise<RecommendationsTracks[]> => {
     `https://api.spotify.com/v1/playlists/${id}/tracks?market=PH&fields=items%28track%28name%2Calbum%28images%2Cid%28url%29%29%2Cartists%28name%29%29%29&limit=10`,
     config
   );
-  return result.data.items.map((track) => ({
-    name: track.track.name,
-    imageUrl: track.track.album.images[0].url,
-    artistName: track.track.artists.map((artist) => artist.name),
-    id: track.track.album.id,
-  }));
+
+  return result.data.items
+    .filter((track) => track.track !== null)
+    .map((track) => ({
+      name: track.track.name,
+      imageUrl: track.track.album.images[0].url,
+      artistName: track.track.artists.map((artist) => artist.name),
+      id: track.track.album.id,
+    }));
 };
 
 const getRecommendations = async (
