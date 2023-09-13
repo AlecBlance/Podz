@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Page from "./Page";
 import { useAppSelector } from "../../../hooks";
+import { AudioContextProvider } from "../../../context/AudioContext";
 
 const Footer = () => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
@@ -73,11 +74,13 @@ const Footer = () => {
           </svg>
         </div>
       </div>
-      <Page
-        isPageVisible={isPageVisible}
-        setIsPageVisible={setIsPageVisible}
-        playing={playing}
-      />
+      <AudioContextProvider>
+        <Page
+          isPageVisible={isPageVisible}
+          setIsPageVisible={setIsPageVisible}
+          playing={playing}
+        />
+      </AudioContextProvider>
     </>
   );
 };
