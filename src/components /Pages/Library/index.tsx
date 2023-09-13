@@ -1,6 +1,9 @@
+import { useAppSelector } from "../../../hooks";
 import SavedMusic from "../../Music/SavedMusic";
 
 const Library = () => {
+  const library = useAppSelector((state) => state.library);
+
   return (
     <div>
       <div className="h-36 flex items-end sticky top-0 background">
@@ -9,21 +12,9 @@ const Library = () => {
         </div>
       </div>
       <div>
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
-        <SavedMusic title="Yay" artist="Alec Blance" />
+        {library.map((liked) => (
+          <SavedMusic track={liked} />
+        ))}
       </div>
     </div>
   );
