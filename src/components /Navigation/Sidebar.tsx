@@ -149,7 +149,7 @@ const Sidebar = () => {
           </svg>
           <p className="text-sm">Your Recent Podz</p>
         </div>
-        <div className="h-full" ref={sectionRef}>
+        <div className="h-full overflow-hidden" ref={sectionRef}>
           {recent
             .slice()
             .reverse()
