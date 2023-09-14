@@ -1,4 +1,5 @@
 import { useAppDispatch } from "../../hooks";
+import { setIsPlaying } from "../../reducers/audioReducer";
 import { setPlaying } from "../../reducers/playingReducer";
 import { insertRecent } from "../../reducers/recentReducer";
 import { SearchResult } from "../../types";
@@ -11,6 +12,7 @@ const SearchResult = ({ track }: { track: SearchResult }) => {
 
   const play = () => {
     dispatch(setPlaying(track));
+    dispatch(setIsPlaying(true));
     dispatch(insertRecent(track));
   };
 
