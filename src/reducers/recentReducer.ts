@@ -37,7 +37,6 @@ export const insertRecent = (playing: SearchResult) => {
 
 export const insertRecentHome = (result: SearchResult, image: string) => {
   return async (dispatch: Dispatch) => {
-    console.log(result);
     dispatch(addRecent(result));
     dispatch(setRecentImage({ image, id: result.id }));
     if (recentService.isPresent(result)) return;
