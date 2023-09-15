@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import Page from "./Page";
 import { useAppSelector, useFavorite } from "../../../hooks";
 import { useAudioContext } from "../../../context/AudioContext";
 
-const Footer = () => {
+const Footer = memo(() => {
   const [isPageVisible, setIsPageVisible] = useState<boolean>(false);
   const playing = useAppSelector((state) => state.playing);
   const { pause, play } = useAudioContext();
@@ -124,5 +124,5 @@ const Footer = () => {
       />
     </>
   );
-};
+});
 export default Footer;

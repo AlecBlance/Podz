@@ -13,7 +13,7 @@ const Library = () => {
       </div>
       <div>
         {library.map((liked) => (
-          <SavedMusic track={liked} />
+          <SavedMusic key={liked.id} track={liked} />
         ))}
       </div>
     </div>
