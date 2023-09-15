@@ -1,30 +1,10 @@
 import { Link, useMatch } from "react-router-dom";
-import RecentMusic from "../Music/RecentMusic";
-import { useAppSelector } from "../../hooks";
-import { useEffect, useRef, useState } from "react";
+import RecentMusicList from "./RecentMusicList";
 
 const Sidebar = () => {
   const isHome = useMatch("/");
   const isLibrary = useMatch("/library");
   const isSearch = useMatch("/search");
-  const recent = useAppSelector((state) => state.recent);
-
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const section = sectionRef.current;
-  const [limit, setLimit] = useState<number>(20);
-
-  const getLimit = (height: number) => {
-    const shouldBeLimit = Math.floor(height / 60);
-    return height % 60 ? shouldBeLimit - 1 : shouldBeLimit;
-  };
-
-  useEffect(() => {
-    if (!section) return;
-    setLimit(getLimit(section.offsetHeight));
-    window.addEventListener("resize", () => {
-      setLimit(getLimit(section.offsetHeight));
-    });
-  }, [section]);
 
   return (
     <div className="bg-[#252525] w-1/4 flex flex-col">
@@ -149,18 +129,7 @@ const Sidebar = () => {
           </svg>
           <p className="text-sm">Your Recent Podz</p>
         </div>
-        <div className="h-full overflow-hidden" ref={sectionRef}>
-          {recent
-            .slice()
-            .reverse()
-            .slice(0, limit)
-            .map((played) => (
-              <RecentMusic
-                key={`${played.id}-${Math.random()}`}
-                played={played}
-              />
-            ))}
-        </div>
+        <RecentMusicList />
       </div>
     </div>
   );
