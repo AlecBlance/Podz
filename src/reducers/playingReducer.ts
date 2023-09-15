@@ -1,6 +1,8 @@
-import { Dispatch, createSlice } from "@reduxjs/toolkit";
-import { SearchResult } from "../types";
+import { createSlice } from "@reduxjs/toolkit";
+import { RecommendationsTracks, SearchResult } from "../types";
 import searchService from "../services/search";
+import { insertRecentHome } from "./recentReducer";
+import { AppDispatch, RootState } from "../store";
 
 const initialState: SearchResult = {
   id: "",
@@ -25,11 +27,17 @@ const playingSlice = createSlice({
 
 export const { setPlaying, setPlayingImage } = playingSlice.actions;
 
-export const playFromHome = (query: string, image: string) => {
-  return async (dispatch: Dispatch) => {
-    const result = await searchService.search(query, { single: true });
+export const playFromHome = (track: RecommendationsTracks) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    const { playing } = getState();
+    if (playing.image === track.imageUrl) return;
+    const result = await searchService.search(
+      `${track.name} ${track.artistName.join(", ")}`,
+      { single: true }
+    );
     dispatch(setPlaying(result));
-    dispatch(setPlayingImage(image));
+    dispatch(setPlayingImage(track.imageUrl));
+    dispatch(insertRecentHome(result as SearchResult, track.imageUrl));
   };
 };
 

@@ -1,6 +1,5 @@
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
 import { SearchResult } from "../types";
-import searchService from "../services/search";
 import recentService from "../services/recent";
 
 const initialState: SearchResult[] = [];
@@ -36,11 +35,9 @@ export const insertRecent = (playing: SearchResult) => {
   };
 };
 
-export const insertRecentHome = (query: string, image: string) => {
+export const insertRecentHome = (result: SearchResult, image: string) => {
   return async (dispatch: Dispatch) => {
-    const result = (await searchService.search(query, {
-      single: true,
-    })) as unknown as SearchResult;
+    console.log(result);
     dispatch(addRecent(result));
     dispatch(setRecentImage({ image, id: result.id }));
     if (recentService.isPresent(result)) return;

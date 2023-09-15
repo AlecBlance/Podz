@@ -7,7 +7,7 @@ const search = async (query: string, filter?: { single: boolean }) => {
       ? `http://localhost:3001/api/search/?query=${query}`
       : `/api/search/?query=${query}`;
   if (filter?.single) url = `${url}&single`;
-  const result = await axios.get<SearchResult[]>(url);
+  const result = await axios.get<SearchResult[] | SearchResult>(url);
   return result.data;
 };
 
