@@ -1,8 +1,8 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 import { useAppSelector } from "../../hooks";
 import RecentMusic from "../Music/RecentMusic";
 
-const RecentMusicList = () => {
+const RecentMusicList = memo(() => {
   const recent = useAppSelector((state) => state.recent);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [limit, setLimit] = useState<number>(20);
@@ -32,5 +32,5 @@ const RecentMusicList = () => {
         ))}
     </div>
   );
-};
+});
 export default RecentMusicList;
