@@ -1,7 +1,6 @@
 import { useAppDispatch } from "../../hooks";
 import { setIsPlaying } from "../../reducers/audioReducer";
 import { playFromHome } from "../../reducers/playingReducer";
-import { insertRecentHome } from "../../reducers/recentReducer";
 import { RecommendationsTracks } from "../../types";
 
 const MusicCard = ({ track }: { track: RecommendationsTracks }) => {
@@ -11,8 +10,7 @@ const MusicCard = ({ track }: { track: RecommendationsTracks }) => {
   const dispatch = useAppDispatch();
 
   const play = () => {
-    dispatch(playFromHome(`${title} ${artist}`, image));
-    dispatch(insertRecentHome(`${title} ${artist}`, image));
+    dispatch(playFromHome(track));
     dispatch(setIsPlaying(true));
   };
 
