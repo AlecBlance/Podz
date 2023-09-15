@@ -12,7 +12,6 @@ const Home = () => {
   );
   const sectionRef = useRef<HTMLDivElement>(null);
   const isLaptopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
-  const section = sectionRef.current;
   const [limit, setLimit] = useState<number>(20);
 
   const getLimit = (width: number) => {
@@ -21,30 +20,33 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const section = sectionRef.current;
     if (!section) return;
     setLimit(getLimit(section.offsetWidth));
     window.addEventListener("resize", () => {
       setLimit(getLimit(section.offsetWidth));
     });
-  }, [section]);
+  }, [sectionRef]);
 
   return isLaptopScreen ? (
     <div className="p-8" ref={sectionRef}>
       <Header />
-      {recommendations.map((recommendation) => (
-        <Section
-          key={recommendation.id}
-          title={recommendation.name}
-          className="justify-around"
-        >
-          {recommendation.tracks.slice(0, limit).map((track) => (
-            <MusicCard
-              key={`${track.id}-${Math.floor(Math.random() * 100)}`}
-              track={track}
-            ></MusicCard>
-          ))}
-        </Section>
-      ))}
+      {recommendations.map((recommendation) => {
+        return (
+          <Section
+            key={recommendation.id}
+            title={recommendation.name}
+            className="justify-around"
+          >
+            {recommendation.tracks.slice(0, limit).map((track) => (
+              <MusicCard
+                key={`${track.id}-${Math.floor(Math.random() * 100)}`}
+                track={track}
+              ></MusicCard>
+            ))}
+          </Section>
+        );
+      })}
     </div>
   ) : (
     <div className="p-8">
