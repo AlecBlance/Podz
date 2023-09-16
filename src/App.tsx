@@ -22,7 +22,7 @@ const App = () => {
     dispatch(initializeRecommendations());
     dispatch(initializeLibrary());
     dispatch(initializeRecent());
-  });
+  }, [dispatch]);
 
   return (
     <div className="h-screen flex flex-col overflow-hidden relative">
