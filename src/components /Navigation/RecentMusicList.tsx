@@ -1,11 +1,13 @@
 import { useRef, useState, useEffect, memo } from "react";
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import RecentMusic from "../Music/RecentMusic";
+import { setRecentLimit } from "../../reducers/recentReducer";
 
 const RecentMusicList = memo(() => {
-  const recent = useAppSelector((state) => state.recent);
+  const recent = useAppSelector((state) => state.recent.recentMusic);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [limit, setLimit] = useState<number>(20);
+  const dispatch = useAppDispatch();
 
   const getLimit = (height: number) => {
     const shouldBeLimit = Math.floor(height / 60);
@@ -15,11 +17,15 @@ const RecentMusicList = memo(() => {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-    setLimit(getLimit(section.offsetHeight));
+    const limit = getLimit(section.offsetHeight);
+    setLimit(limit);
+    dispatch(setRecentLimit(limit));
     window.addEventListener("resize", () => {
-      setLimit(getLimit(section.offsetHeight));
+      const onChangeLimit = getLimit(section.offsetHeight);
+      setLimit(onChangeLimit);
+      dispatch(setRecentLimit(onChangeLimit));
     });
-  }, [sectionRef]);
+  }, [sectionRef, dispatch]);
 
   return (
     <div className="h-full overflow-hidden" ref={sectionRef}>

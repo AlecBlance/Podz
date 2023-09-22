@@ -2,30 +2,62 @@ import { Dispatch, createSlice } from "@reduxjs/toolkit";
 import { SearchResult } from "../types";
 import recentService from "../services/recent";
 
-const initialState: SearchResult[] = [];
+const initialState: { recentMusic: SearchResult[]; recentNumber: number } = {
+  recentMusic: [],
+  recentNumber: 0,
+};
 
 const recentSlice = createSlice({
   name: "recent",
   initialState,
   reducers: {
-    setRecent(_state, action) {
-      return action.payload;
+    setRecent(state, action) {
+      if (!state.recentNumber) return;
+      if (state.recentNumber < action.payload.length) {
+        return {
+          ...state,
+          recentMusic: action.payload.slice(-state.recentNumber),
+        };
+      }
+      return { ...state, recentMusic: action.payload };
     },
     addRecent(state, action) {
-      if (state.some((recent) => recent.id === action.payload.id)) return state;
-      return state.concat(action.payload);
+      let recentMusic = state.recentMusic;
+      if (state.recentNumber < state.recentMusic.length) {
+        recentMusic = recentMusic.slice(-state.recentNumber);
+      }
+      if (recentMusic.some((recent) => recent.id === action.payload.id))
+        return { ...state, recentMusic: state.recentMusic };
+      const recentMusicCopy = recentMusic.concat();
+      if (
+        state.recentNumber &&
+        state.recentNumber === state.recentMusic.length
+      ) {
+        recentMusicCopy.shift();
+      }
+      return {
+        ...state,
+        recentMusic: recentMusicCopy.concat(action.payload),
+      };
     },
     setRecentImage(state, action) {
-      return state.map((recent) =>
-        recent.id === action.payload.id
-          ? { ...recent, image: action.payload.image }
-          : recent
-      );
+      return {
+        ...state,
+        recentMusic: state.recentMusic.map((recent) =>
+          recent.id === action.payload.id
+            ? { ...recent, image: action.payload.image }
+            : recent
+        ),
+      };
+    },
+    setRecentLimit(state, action) {
+      return { ...state, recentNumber: action.payload };
     },
   },
 });
 
-export const { setRecent, addRecent, setRecentImage } = recentSlice.actions;
+export const { setRecent, addRecent, setRecentImage, setRecentLimit } =
+  recentSlice.actions;
 
 export const insertRecent = (playing: SearchResult) => {
   return async (dispatch: Dispatch) => {
