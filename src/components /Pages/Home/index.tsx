@@ -29,8 +29,8 @@ const Home = () => {
   }, [sectionRef]);
 
   return isLaptopScreen ? (
-    <div className="p-8" ref={sectionRef}>
-      <Header />
+    <div className="p-8">
+      <Header innerRef={sectionRef} />
       {recommendations.map((recommendation) => {
         return (
           <Section
@@ -50,7 +50,7 @@ const Home = () => {
     </div>
   ) : (
     <div className="p-8">
-      <Header />
+      <Header innerRef={sectionRef} />
       {recommendations.map((recommendation) => (
         <Section key={recommendation.id} title={recommendation.name}>
           {recommendation.tracks.map((track) => (
