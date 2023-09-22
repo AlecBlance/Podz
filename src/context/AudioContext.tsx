@@ -41,9 +41,7 @@ export const AudioContextProvider = (props: { children: React.ReactNode }) => {
 
   const reset = useCallback(() => {
     if (!audioRef.current) return;
-    const savePrev = audioRef.current.src;
-    audioRef.current.src = "";
-    audioRef.current.src = savePrev;
+    audioRef.current.load();
     pause();
   }, [pause]);
 
