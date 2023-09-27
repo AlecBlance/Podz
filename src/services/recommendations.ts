@@ -5,6 +5,7 @@ import {
   RecommendationsTracksResponse,
   SpotifyClientCredentials,
 } from "../types";
+import { Buffer } from "buffer";
 import axios from "axios";
 
 let token: string | null = null;
@@ -14,12 +15,23 @@ const setToken = (userToken: string) => {
 };
 
 const loginSpotify = async (): Promise<SpotifyClientCredentials> => {
-  const re =
-    /<script id="session" data-testid="session" type="application\/json">({.*})<\/script>/;
-  const result = await axios.get(
-    "https://api.allorigins.win/get?url=https://open.spotify.com"
-  );
-  return JSON.parse(result.data.contents.match(re)[1]);
+  const client_id = import.meta.env.VITE_CLIENT_ID;
+  const client_secret = import.meta.env.VITE_CLIENT_SECRET;
+  const data = { grant_type: "client_credentials" };
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${Buffer.from(
+        `${client_id}:${client_secret}`
+      ).toString("base64")}`,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    data: data,
+    url: "https://accounts.spotify.com/api/token",
+  };
+  const result = await axios(options);
+
+  return result.data;
 };
 
 const getTracks = async (id: string): Promise<RecommendationsTracks[]> => {
