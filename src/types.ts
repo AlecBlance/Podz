@@ -13,10 +13,9 @@ export interface SectionProps {
 }
 
 export interface SpotifyClientCredentials {
-  accessToken: string;
-  accessTokenExpirationTimestampMs: number;
-  isAnonymous: boolean;
-  clientId: string;
+  access_token: string;
+  token_type: string;
+  expires_in: 3600;
 }
 
 export interface RecommendationsResponse {

@@ -17,8 +17,8 @@ export const { setRecommendations } = recommendationsSlice.actions;
 
 export const initializeRecommendations = () => {
   return async (dispatch: Dispatch) => {
-    const { accessToken } = await recommendationsService.loginSpotify();
-    recommendationsService.setToken(accessToken);
+    const { access_token } = await recommendationsService.loginSpotify();
+    recommendationsService.setToken(access_token);
     const phRecommendations = await recommendationsService.getRecommendations(
       "PH"
     );
